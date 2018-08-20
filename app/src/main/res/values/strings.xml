@@ -1,0 +1,158 @@
+<resources>
+    <string name="app_name">ShouMei</string>
+    <string name="placeholder">我是占位符</string>
+
+    <!--首页Title-->
+    <string name="default_city">定位中</string>
+    <string name="formal_title">首媒中国</string>
+    <string name="dev_title">开发版本</string>
+
+    <!--注册-->
+    <string name="next">下一步</string>
+    <string name="regAgree">我已阅读并同意 《首媒服务条款》</string>
+    <string name="phone">手机号</string>
+    <string name="inputCode">请输入短信验证码</string>
+    <string name="inputPhone">请输入手机号码</string>
+    <string name="inputPhoneBinding">输入手机号进行绑定</string>
+    <string name="inputPassDesc">设置6–20位数字或字母密码</string>
+    <string name="inputPassword">请输入密码</string>
+    <string name="getCode">获取验证码</string>
+    <string name="surePass">请再次确认您的密码</string>
+    <string name="inputPwdError">两次输入的密码不一致</string>
+
+    <!--登录-->
+    <string name="my">我的</string>
+    <string name="share">分享</string>
+    <string name="login">登录</string>
+    <string name="reg_account">注册账户</string>
+    <string name="help">需要帮助</string>
+
+    <string name="moreLogin">更多登录方式</string>
+    <string name="passForget"><u>忘记密码？</u></string>
+    <string name="nomreId"><u>没有账号？</u></string>
+    <string name="regist"><u>注册</u></string>
+    <string name="logout">退出登录</string>
+    <string name="settingPass">设置登录密码</string>
+    <string name="binding">绑定</string>
+    <string name="close">关闭</string>
+    <string name="cancle">取消</string>
+    <string name="call">拨打</string>
+    <string name="sure">确定</string>
+    <string name="smPhone">首媒客服：01078334322</string>
+
+    <!--错误信息-->
+    <string name="networkError">请检查网络连接</string>
+    <string name="timeoutError">网络请求超时,请稍后重试！</string>
+    <string name="connectError">无法连接到服务器！</string>
+
+    <!--定位-->
+    <string name="iconLocal">&#xe60d;</string>
+    <!--分享-->
+    <string name="iconShare">&#xe60f;</string>
+    <!--扫一扫-->
+    <string name="iconScan">&#xe60e;</string>
+    <!--首页-->
+    <string name="iconHome">&#xe609;</string>
+    <!--聊聊-->
+    <string name="iconChat">&#xe60a;</string>
+    <!--购物-->
+    <string name="iconShoppingg">&#xe60b;</string>
+    <!--我的-->
+    <string name="iconMine">&#xe60c;</string>
+    <!--返回-->
+    <string name="iconBack">&#xe610;</string>
+    <!--手机-->
+    <string name="iconPhone">&#xe612;</string>
+    <!--密码-->
+    <string name="iconPass">&#xe613;</string>
+    <!--关闭-->
+    <string name="iconClose">&#xe614;</string>
+    <!--圆型关闭-->
+    <string name="iconCircleClose">&#xe663;</string>
+    <!--微信-->
+    <string name="iconWechat">&#xe615;</string>
+    <!--QQ-->
+    <string name="iconQQ">&#xe633;</string>
+    <!--新浪-->
+    <string name="iconSina">&#xe616;</string>
+    <!--短信-->
+    <string name="iconSms">&#xe617;</string>
+    <!--下三角-->
+    <string name="iconDown">&#xe618;</string>
+    <!--更多向下-->
+    <string name="iconMoreDown"> &#xe647;</string>
+    <!--显示密码-->
+    <string name="iconShow">&#xe61a;</string>
+    <!--隐藏密码-->
+    <string name="iconHiden">&#xe61b;</string>
+    <!--选中-->
+    <string name="iconChecked">&#xe635;</string>
+    <!--未选中-->
+    <string name="iconUnChecked">&#xe636;</string>
+    <!--上-->
+    <string name="iconUp">&#xe639;</string>
+    <!--日历-->
+    <string name="iconCalendar">&#xe638;</string>
+    <!--注意-->
+    <string name="iconTip">&#xe63a;</string>
+    <!--更多-->
+    <string name="iconMore">&#xe63c;</string>
+    <!--成功-->
+    <string name="iconComplet">&#xe611;</string>
+    <!--设置-->
+    <string name="iconSetting">&#xe64e;</string>
+    <!--二维码-->
+    <string name="iconQrcode">&#xe64f;</string>
+    <!--我的首页-->
+    <string name="iconMineHome">&#xe652;</string>
+    <!--我的收藏-->
+    <string name="iconMineCollection">&#xe653;</string>
+    <!--我的粉丝-->
+    <string name="iconMineFan">&#xe650;</string>
+    <!--我的关注-->
+    <string name="iconMineWatch">&#xe651;</string>
+    <!--认证-->
+    <string name="iconMineAuthen">&#xe656;</string>
+    <!--订单-->
+    <string name="iconMineOrder">&#xe655;</string>
+    <!--钱包-->
+    <string name="iconMinePurse">&#xe658;</string>
+    <!--帮助中心-->
+    <string name="iconMineHelp">&#xe654;</string>
+    <!--地址管理-->
+    <string name="iconAddress">&#xe665;</string>
+    <!--邀请-->
+    <string name="iconInvite">&#xe664;</string>
+    <!--新媒人-->
+    <string name="iconCertification">&#xe667;</string>
+    <!--服务商-->
+    <string name="iconServices">&#xe666;</string>
+    <!--查看更多-->
+    <string name="iconLookMore">查看 &#xe63c;</string>
+    <!--首媒之手-->
+    <string name="iconShoumei">&#xe66a;</string>
+    <!--收益-->
+    <string name="iconInCome">&#xe669;</string>
+    <!--消息-->
+    <string name="iconMessage">&#xe668;</string>
+    <!--搜索放大镜-->
+    <string name="iconSearch">&#xe64a;</string>
+    <!--大众红包-->
+    <string name="iconOneBonus">&#xe608;</string>
+    <!--精准红包-->
+    <string name="iconTwoBonus">&#xe66b;</string>
+    <!--精准红包-->
+    <string name="iconThreeBonus">&#xe66c;</string>
+
+    <!--媒体扶贫-->
+    <string name="iconMedia">&#xe66d;</string>
+    <!--消费扶贫-->
+    <string name="iconConsume">&#xe66d;</string>
+    <!--查看-->
+    <string name="iconLook">&#xe66f;</string>
+    <!--评论数-->
+    <string name="iconComment">&#xe670;</string>
+    <!--问好-->
+    <string name="iconWhat">&#xe671;</string>
+
+</resources>

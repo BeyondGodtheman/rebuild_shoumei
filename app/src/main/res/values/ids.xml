@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--FrameLayout-->
+    <item name="frameTitle" type="id" />
+    <item name="frameBody" type="id" />
+
+    <!--TextView-->
+    <item name="tvTitle" type="id" />
+    <item name="tvLeft" type="id" />
+    <item name="tvDesc" type="id" />
+    <item name="tvChecked" type="id"/>
+
+    <!--EditText-->
+    <item name="edtPhone" type="id" />
+    <item name="edtCode" type="id" />
+    <item name="edtPassWord" type="id"/>
+    <item name="editSurePassWord" type="id"/>
+
+    <!--Button-->
+    <item name="btnNext" type="id" />
+    <item name="btnCode" type="id"/>
+
+    <!--Dialog-->
+    <item name="tvCancel" type="id"/>
+    <item name="ivLine" type="id"/>
+    <item name="tvSure" type="id"/>
+
+    <!--ImageView-->
+    <item name="ivPhoto" type="id"/>
+</resources>

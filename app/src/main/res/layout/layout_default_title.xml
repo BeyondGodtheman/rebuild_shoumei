@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Title"
+    android:background="@color/white">
+
+    <com.coco_sh.shmstore.widget.textView.IconTextView
+        android:id="@id/tvLeft"
+        style="@style/Title.Icon"
+        android:layout_marginLeft="@dimen/w25"
+        android:text="@string/iconBack"
+        android:layout_marginStart="@dimen/w25" />
+
+    <TextView
+        style="@style/TitleText"
+        android:id="@id/tvTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/w100"
+        android:layout_marginLeft="@dimen/w25"
+        android:layout_marginRight="@dimen/w100"
+        android:layout_marginStart="@dimen/w25"
+        android:layout_toRightOf="@id/tvLeft"
+        android:gravity="center"
+        android:text="@string/placeholder"
+        android:layout_toEndOf="@id/tvLeft" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/h1"
+        android:background="@color/graye0"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
