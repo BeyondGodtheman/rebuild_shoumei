@@ -1,14 +1,15 @@
 package com.coco_sh.shmstore.regist.view
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
+import android.widget.CompoundButton
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseActivity
 import com.coco_sh.shmstore.base.BaseModel
 import com.coco_sh.shmstore.regist.presenter.RegisterPresenter
 import com.coco_sh.shmstore.sms.model.SmSMS
 import com.coco_sh.shmstore.sms.type.SmsType
-import com.coco_sh.shmstore.widget.textView.CheckedIconTextView
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -21,6 +22,7 @@ class RegisterActivity : BaseActivity(), IRegisterView {
     private val registerPresenter = RegisterPresenter(this)
 
     override fun showLoading() {
+
     }
 
     override fun hidenLoading() {
@@ -40,6 +42,65 @@ class RegisterActivity : BaseActivity(), IRegisterView {
         })
 
 
+        //手机号码长度监听
+        edtPhone.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                registerPresenter.checkPhone(s?.length ?: 0)
+            }
+
+        })
+
+        //短信验证码长度监听
+        edtCode.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                registerPresenter.checkCode(s?.length ?: 0)
+            }
+        })
+
+        //密码长度监听
+        edtPassWord.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                registerPresenter.checkPassWrod(s?.length ?: 0, false)
+            }
+        })
+
+        //确认密码
+        editSurePassWord.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                registerPresenter.checkPassWrod(s?.length ?: 0, true)
+            }
+        })
+
+        //协议按钮监听
+        tvChecked.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+            registerPresenter.checkArgeen(isChecked)
+        })
+
+
         btnNext.setOnClickListener(this)
     }
 
@@ -50,26 +111,13 @@ class RegisterActivity : BaseActivity(), IRegisterView {
 
     }
 
+
     override fun onClick(view: View) {
-        when (view.id) {
-            btnNext.id -> registerPresenter.regist()  //开始注册
+        when (view.id) {   //开始注册
+            btnNext.id -> registerPresenter.regist(edtPhone.text.toString(), edtCode.text.toString(),
+                    edtPassWord.text.toString(), editSurePassWord.text.toString())
         }
     }
-
-    //手机号码
-    override fun getEditPhoto(): EditText = edtPhone
-
-    //验证码
-    override fun getEditCode(): EditText = edtCode
-
-    //密码
-    override fun getEditPass(): EditText = edtPassWord
-
-    //确认密码
-    override fun getEditSurePass(): EditText = editSurePassWord
-
-    //协议
-    override fun getBtnIsArgeen(): CheckedIconTextView = tvChecked
 
 
     //注册按钮状态

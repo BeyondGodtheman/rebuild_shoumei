@@ -1,8 +1,5 @@
 package com.coco_sh.shmstore.regist.presenter
 
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.CompoundButton
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.SmApplication
 import com.coco_sh.shmstore.base.BaseModel
@@ -36,85 +33,6 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
     override fun onCreate() {
         smsLoader = SMSLoader(composites)
         registerLoader = RegisterLoader(composites)
-
-        /**
-         * 电话文本逻辑
-         */
-        registerView?.getEditPhoto()?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                phoneOk = s?.length == 11
-                registerView?.codeBtnSata(phoneOk)
-                isOk()
-            }
-
-        })
-
-        /**
-         * 验证码文本逻辑
-         */
-        registerView?.getEditCode()?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                codeOk = s?.length == 6
-                isOk()
-            }
-        })
-
-        /**
-         * 密码文本逻辑
-         */
-        registerView?.getEditPass()?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                passwordOk = s?.length ?: 0 >= 6
-                isOk()
-            }
-
-        })
-
-        /**
-         * 确认密码文本逻辑
-         */
-        registerView?.getEditSurePass()?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                surePasswordOk = s?.length ?: 0 >= 6
-                isOk()
-            }
-
-        })
-
-
-        /**
-         * 协议按钮
-         */
-        registerView?.getBtnIsArgeen()?.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
-            isArgeen = isChecked
-            isOk()
-        })
-
     }
 
 
@@ -133,19 +51,18 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
     }
 
     //注册账号
-    fun regist() {
+    fun regist(phone: String, code: String, password: String, surePassword: String) {
         if (!isArgeen) {
             ToastUtil.show("须同意此协议后再进行注册")
             return
         }
 
-        if (registerView?.getEditPass()?.text.toString() != registerView?.getEditSurePass()?.text.toString()) {
+        if (password != surePassword) {
             ToastUtil.show(SmApplication.getApp().getString(R.string.inputPwdError))
             return
         }
 
-        registerLoader?.regist(registerView?.getEditPhoto()?.text.toString(), registerView?.getEditPass()?.text.toString(),
-                registerView?.getEditCode()?.text.toString(), smsKey, object : ApiManager.OnResult<BaseModel<Login>>() {
+        registerLoader?.regist(phone,code,password,smsKey, object : ApiManager.OnResult<BaseModel<Login>>() {
             override fun onSuccess(data: BaseModel<Login>) {
                 data.message?.let {
                     UserManager.setLogin(it)
@@ -159,11 +76,48 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
         })
     }
 
+    /**
+     * 检查手机号码长度
+     */
+    fun checkPhone(length: Int) {
+        phoneOk = length == 11
+        registerView?.codeBtnSata(phoneOk)
+        isOk()
+    }
+
+    /**
+     * 检查手机号码长度
+     */
+    fun checkCode(length: Int) {
+        codeOk = length == 6
+        isOk()
+    }
+
+    /**
+     * 检查密码长度
+     */
+    fun checkPassWrod(length: Int, isSure: Boolean) {
+        if (!isSure) {
+            passwordOk = length >= 6
+        } else {
+            surePasswordOk = length >= 6
+        }
+        isOk()
+    }
+
+    /**
+     * 检查协议状态
+     */
+    fun checkArgeen(isChecked: Boolean) {
+        isArgeen = isChecked
+        isOk()
+    }
+
 
     /**
      * 校验提交条件
      */
-    fun isOk() {
+    private fun isOk() {
         if (phoneOk && codeOk && passwordOk && surePasswordOk) {
             registerView?.registBtnSata(true)
         } else {
