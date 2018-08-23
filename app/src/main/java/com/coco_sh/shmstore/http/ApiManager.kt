@@ -14,6 +14,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.*
 import org.json.JSONObject
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.io.File
@@ -94,15 +95,26 @@ object ApiManager {
 
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
+
+                        var code = "0"
+                        var message = ""
+
                         if (e is SocketTimeoutException || e is TimeoutException) {
-                            onResult.onFailed("0", SmApplication.getApp().getString(R.string.timeoutError))
-                            return
+                            message = SmApplication.getApp().getString(R.string.timeoutError)
+                            onResult.onFailed(code, message)
                         }
 
                         if (e is ConnectException) {
-                            onResult.onFailed("0", SmApplication.getApp().getString(R.string.connectError))
-                            return
+                            message = SmApplication.getApp().getString(R.string.connectError)
+                            onResult.onFailed(code, message)
                         }
+
+                        if (e is HttpException) {
+                            code = e.code().toString()
+                            message = e.message()
+                            onResult.onFailed(code, message)
+                        }
+                        ToastUtil.show(message)
                     }
 
                     override fun onComplete() {
@@ -127,9 +139,9 @@ object ApiManager {
                 sb.append("${it.key}=${it.value}&")
             }
             sb.deleteCharAt(sb.length - 1)
-            request(composites,apiService.get(url + sb.toString()), onResult)
+            request(composites, apiService.get(url + sb.toString()), onResult)
         } else {
-            request(composites,apiService.get(url), onResult)
+            request(composites, apiService.get(url), onResult)
         }
     }
 
@@ -154,7 +166,7 @@ object ApiManager {
     /**
      * Post一张图片
      */
-    fun <T> postImage(composites: CompositeDisposable?, path: String,onResult: OnResult<T>) {
+    fun <T> postImage(composites: CompositeDisposable?, path: String, onResult: OnResult<T>) {
         val requestBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
         val file = File(path)
         requestBodyBuilder.addFormDataPart("file", path,

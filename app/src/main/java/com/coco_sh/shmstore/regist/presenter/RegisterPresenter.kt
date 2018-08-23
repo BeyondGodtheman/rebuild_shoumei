@@ -38,13 +38,16 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
 
     //发送注册验证码
     fun sendSMS(phone: String, smsType: SmsType) {
+        registerView?.showLoading()
         smsLoader?.sendCode(phone, smsType, object : ApiManager.OnResult<BaseModel<SmSMS>>() {
             override fun onSuccess(data: BaseModel<SmSMS>) {
+                registerView?.hidenLoading()
                 smsKey = data.message?.smskey ?: ""
                 registerView?.snedSMSResult(data)
             }
 
             override fun onFailed(code: String, message: String) {
+                registerView?.hidenLoading()
             }
         })
 
@@ -62,8 +65,10 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
             return
         }
 
-        registerLoader?.regist(phone,code,password,smsKey, object : ApiManager.OnResult<BaseModel<Login>>() {
+        registerView?.showLoading()
+        registerLoader?.regist(phone, code, password, smsKey, object : ApiManager.OnResult<BaseModel<Login>>() {
             override fun onSuccess(data: BaseModel<Login>) {
+                registerView?.hidenLoading()
                 data.message?.let {
                     UserManager.setLogin(it)
                     registerView?.registResult()
@@ -71,6 +76,7 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
             }
 
             override fun onFailed(code: String, message: String) {
+                registerView?.hidenLoading()
             }
 
         })

@@ -10,6 +10,7 @@ import com.coco_sh.shmstore.base.BaseModel
 import com.coco_sh.shmstore.regist.presenter.RegisterPresenter
 import com.coco_sh.shmstore.sms.model.SmSMS
 import com.coco_sh.shmstore.sms.type.SmsType
+import com.coco_sh.shmstore.utils.LoadingUtil
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -19,13 +20,20 @@ import kotlinx.android.synthetic.main.activity_register.*
  */
 class RegisterActivity : BaseActivity(), IRegisterView {
 
-    private val registerPresenter = RegisterPresenter(this)
+    private val registerPresenter: RegisterPresenter by lazy {
+        RegisterPresenter(this)
+    }
+
+    private val loadingUtil: LoadingUtil by lazy {
+        LoadingUtil(frameBody)
+    }
 
     override fun showLoading() {
-
+        loadingUtil.showLoading()
     }
 
     override fun hidenLoading() {
+        loadingUtil.hidenLoading()
     }
 
 
