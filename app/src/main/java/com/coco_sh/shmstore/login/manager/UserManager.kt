@@ -1,6 +1,5 @@
 package com.coco_sh.shmstore.login.manager
 
-import android.graphics.Bitmap
 import com.coco_sh.shmstore.login.model.Login
 import com.coco_sh.shmstore.utils.SharedUtil
 import com.google.gson.Gson
@@ -17,14 +16,10 @@ object UserManager {
     //我的页面入口数据
     private const val MEMBERENTRANCE = "memberentrance"
 
-    private var bitmap_topbg: Bitmap? = null
-    private var default_bg: Bitmap? = null
-
-    private var tag: String? = null
     /**
      * 获取用户ID
      */
-    fun getUserId(): String =  getLogin()?.code?:""
+    fun getUserId(): String = getLogin()?.code ?: ""
 
 
     /**
@@ -50,7 +45,6 @@ object UserManager {
         }
         return null
     }
-
 
 
     /**
