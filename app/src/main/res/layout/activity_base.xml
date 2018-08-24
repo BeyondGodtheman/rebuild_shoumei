@@ -5,7 +5,8 @@
 
     <FrameLayout
         android:id="@id/frameTitle"
-        style="@style/Title"/>
+        style="@style/Title"
+        android:background="@color/white"/>
 
     <FrameLayout
         android:id="@id/frameBody"

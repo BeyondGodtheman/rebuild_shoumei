@@ -43,8 +43,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SMTheme"
-        tools:replace="android:allowBackup"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:allowBackup">
 
         <!-- 高德地图KAY -->
         <meta-data
@@ -64,7 +64,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".home.view.MainActivity"/>
+        <activity android:name=".home.view.MainActivity" />
 
 
         <!--注册页面-->
@@ -78,6 +78,11 @@
         <!--忘记密码-->
         <activity
             android:name=".forget.view.ForgetPassActivity"
+            android:launchMode="singleTop" />
+
+        <!--设置页面-->
+        <activity
+            android:name=".setting.SettingActivity"
             android:launchMode="singleTop" />
     </application>
 

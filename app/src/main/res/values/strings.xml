@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ShouMei</string>
+    <string name="app_name">首媒</string>
     <string name="placeholder">我是占位符</string>
 
     <!--首页Title-->
@@ -39,6 +39,10 @@
     <string name="call">拨打</string>
     <string name="sure">确定</string>
     <string name="smPhone">首媒客服：01078334322</string>
+
+    <!--档案-->
+    <string name="visitor">未登录</string>
+    <string name="no">No.</string>
 
     <!--错误信息-->
     <string name="networkError">请检查网络连接</string>

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import com.coco_sh.shmstore.R
 import kotlinx.android.synthetic.main.fragment_base.view.*
 
@@ -26,6 +27,15 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
     }
 
 
+    //沉浸式Title
+    fun immersionTitle() {
+        mView?.iframeBody?.apply {
+            (layoutParams as RelativeLayout.LayoutParams).addRule(RelativeLayout.BELOW, 0)
+        }
+        mView?.iframeTitle?.setBackgroundResource(R.color.transparent)
+
+    }
+
     abstract fun setLayout(): Int
 
     abstract fun initView()
@@ -38,7 +48,4 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
 
     fun getBaseActivity(): BaseActivity = activity as BaseActivity
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

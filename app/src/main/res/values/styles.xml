@@ -46,7 +46,6 @@
     </style>
 
 
-
     <!--手机号码输入框样式-->
     <style name="PhoneEidttextStyle" parent="EidttextStyle">
         <item name="android:maxLength">11</item>
@@ -96,4 +95,9 @@
     </style>
 
 
+    <!--菜单子条目view的样式表-->
+    <declare-styleable name="ItemShowView">
+        <attr name="nameText" format="string" />
+        <attr name="valueText" format="string" />
+    </declare-styleable>
 </resources>

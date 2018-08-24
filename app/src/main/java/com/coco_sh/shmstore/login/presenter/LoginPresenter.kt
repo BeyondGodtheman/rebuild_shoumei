@@ -6,6 +6,7 @@ import com.coco_sh.shmstore.base.BasePresenter
 import com.coco_sh.shmstore.base.IBaseView
 import com.coco_sh.shmstore.http.ApiManager
 import com.coco_sh.shmstore.login.data.LoginLoader
+import com.coco_sh.shmstore.login.manager.UserManager
 import com.coco_sh.shmstore.login.model.Login
 import com.coco_sh.shmstore.login.model.LoginHistory
 import com.coco_sh.shmstore.login.view.ILoginView
@@ -31,9 +32,12 @@ class LoginPresenter(private var iLoginView: ILoginView?) : BasePresenter<IBaseV
         loginLoader?.login(phone, password, object : ApiManager.OnResult<BaseModel<Login>>() {
 
             override fun onSuccess(data: BaseModel<Login>) {
-                val loginHistory = LoginHistory(phone)
-                SmApplication.getApp().dataStorage.storeOrUpdate(loginHistory) //添加登录历史记录
-                iLoginView?.loginResult(data, false) //回调登录结果
+                data.message?.let {
+                    val loginHistory = LoginHistory(phone)
+                    SmApplication.getApp().dataStorage.storeOrUpdate(loginHistory) //添加登录历史记录
+                    UserManager.setLogin(it)
+                    iLoginView?.loginResult(data, false) //回调登录结果
+                }
             }
 
             override fun onFailed(code: String, message: String) {}
