@@ -1,8 +1,6 @@
 package com.coco_sh.shmstore.login.presenter
 
-import android.text.Editable
-import android.text.TextWatcher
-import com.coco_sh.shmstore.R
+import com.coco_sh.shmstore.SmApplication
 import com.coco_sh.shmstore.base.BaseModel
 import com.coco_sh.shmstore.base.BasePresenter
 import com.coco_sh.shmstore.base.IBaseView
@@ -11,6 +9,7 @@ import com.coco_sh.shmstore.login.data.LoginLoader
 import com.coco_sh.shmstore.login.model.Login
 import com.coco_sh.shmstore.login.model.LoginHistory
 import com.coco_sh.shmstore.login.view.ILoginView
+import xiaofei.library.comparatorgenerator.ComparatorGenerator
 
 /**
  * 登录
@@ -19,61 +18,21 @@ import com.coco_sh.shmstore.login.view.ILoginView
 class LoginPresenter(private var iLoginView: ILoginView?) : BasePresenter<IBaseView>(iLoginView) {
     private var phoneOK = false
     private var passOK = false
-    private var loginLoader: LoginLoader<ILoginView>? = null
+    private var loginLoader: LoginLoader? = null
 
 
     override fun onCreate() {
-        iLoginView?.let {
-            loginLoader = LoginLoader(it)
-
-            //监听帐号输入达到位数通过条件
-            it.getEditPhone().addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                }
-
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    s?.let {
-                        phoneOK = it.length >= 11
-                        isOk()
-                    }
-                }
-            })
-
-            //监听密码输入达到位数通过条件
-            it.getEditPass().addTextChangedListener(object : TextWatcher {
-
-
-                override fun afterTextChanged(s: Editable?) {
-                }
-
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                    s?.let {
-                        passOK = it.length >= 6
-                        isOk()
-                    }
-                }
-            })
-
-        }
-
+        loginLoader = LoginLoader(composites)
     }
 
+
     //用户名密码登录
-    fun login() {
-        val phone = iLoginView?.getEditPhone()?.text.toString()
-        val password = iLoginView?.getEditPass()?.text.toString()
+    fun login(phone: String, password: String) {
         loginLoader?.login(phone, password, object : ApiManager.OnResult<BaseModel<Login>>() {
 
             override fun onSuccess(data: BaseModel<Login>) {
                 val loginHistory = LoginHistory(phone)
-                addHistory(loginHistory)  //添加登录历史记录
+                SmApplication.getApp().dataStorage.storeOrUpdate(loginHistory) //添加登录历史记录
                 iLoginView?.loginResult(data, false) //回调登录结果
             }
 
@@ -81,34 +40,37 @@ class LoginPresenter(private var iLoginView: ILoginView?) : BasePresenter<IBaseV
         })
     }
 
-
-    //加载登录历史记录
-    fun getHistorys(): List<LoginHistory>? = loginLoader?.getHistorys()
-
-
-    //添加登录历史记录
-    fun addHistory(history: LoginHistory) {
-        loginLoader?.addHistory(history)
+    //检查手机号码长度
+    fun checkPhone(length: Int) {
+        phoneOK = length >= 11
+        isOk()
     }
 
-    //删除登录历史记录
-    fun removeHistory(history: LoginHistory) {
-        loginLoader?.removeHistory(history)
+
+    //检查密码长度
+    fun checkPassword(length: Int) {
+        passOK = length >= 6
+        isOk()
+    }
+
+
+    //加载登录历史记录
+    fun getHistorys() {
+        val comparator = ComparatorGenerator<LoginHistory>(LoginHistory::class.java).generate() //按时间排序
+        iLoginView?.onHistory(SmApplication.getApp().dataStorage.loadAll(LoginHistory::class.java, comparator) as ArrayList<LoginHistory>)
     }
 
 
     //输入条件检查
-    fun isOk() {
-        iLoginView?.getBtnLogin()?.apply {
+    private fun isOk() {
+        iLoginView?.apply {
             if (phoneOK && passOK) {
-                isClickable = true
-                setBackgroundResource(R.color.red)
+                loginBtnState(true)
             } else {
-                isClickable = false
-                setBackgroundResource(R.color.grayBtn)
+                loginBtnState(false)
             }
-        }
 
+        }
     }
 
 

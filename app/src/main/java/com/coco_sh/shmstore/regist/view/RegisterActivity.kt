@@ -130,12 +130,13 @@ class RegisterActivity : BaseActivity(), IRegisterView {
 
     //注册按钮状态
     override fun registBtnSata(boolean: Boolean) {
+        btnNext.isClickable = boolean
+
         if (boolean) {
             btnNext.setBackgroundResource(R.color.red)
         } else {
             btnNext.setBackgroundResource(R.color.grayBtn)
         }
-        btnNext.isClickable = boolean
     }
 
     //短信按钮状态

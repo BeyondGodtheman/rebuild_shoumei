@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/h150"
+    android:padding="@dimen/h50">
+
+    <TextView
+        android:id="@id/tvPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray6"
+        tools:ignore="RelativeOverlap"
+        tools:text="13111111111" />
+
+    <com.coco_sh.shmstore.widget.textView.IconTextView
+        android:id="@id/tvDelete"
+        android:layout_width="@dimen/w100"
+        android:layout_height="@dimen/h60"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:text="@string/iconClose"
+        android:textColor="@color/iconColor"
+        android:textSize="@dimen/w40" />
+
+</RelativeLayout>

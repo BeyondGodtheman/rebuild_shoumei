@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.IBinder
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -56,6 +57,15 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         return super.onTouchEvent(event)
+    }
+
+
+    /**
+     * 隐藏输入法键盘
+     */
+    fun hideKeyboard() {
+        val im = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        im.hideSoftInputFromWindow(this.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
 
 

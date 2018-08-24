@@ -7,6 +7,7 @@ import com.coco_sh.shmstore.base.BasePresenter
 import com.coco_sh.shmstore.http.ApiManager
 import com.coco_sh.shmstore.login.manager.UserManager
 import com.coco_sh.shmstore.login.model.Login
+import com.coco_sh.shmstore.login.model.LoginHistory
 import com.coco_sh.shmstore.regist.data.RegisterLoader
 import com.coco_sh.shmstore.regist.view.IRegisterView
 import com.coco_sh.shmstore.sms.data.SMSLoader
@@ -70,7 +71,9 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
             override fun onSuccess(data: BaseModel<Login>) {
                 registerView?.hidenLoading()
                 data.message?.let {
-                    UserManager.setLogin(it)
+                    val loginHistory = LoginHistory(phone)
+                    SmApplication.getApp().dataStorage.storeOrUpdate(loginHistory) //保存登录历史记录
+                    UserManager.setLogin(it) //存储登录信息
                     registerView?.registResult()
                 }
             }

@@ -1,9 +1,8 @@
 package com.coco_sh.shmstore.dialog
 
 import android.Manifest
-import android.app.Activity
-import android.app.ActivityOptions
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.dialog_default.*
  * 首媒默认样式的对话框
  * Created by zhangye on 2018/1/27.
  */
-class SmediaDialog(private var activity: Activity) : Dialog(activity), View.OnClickListener {
+class SmediaDialog(context: Context) : Dialog(context), View.OnClickListener {
     var OnClickListener: View.OnClickListener? = null
     var cancelOnClickListener: View.OnClickListener? = null
     private var cancleIsFinish = false
@@ -68,10 +67,6 @@ class SmediaDialog(private var activity: Activity) : Dialog(activity), View.OnCl
         tvCancel.text = posiText
     }
 
-    fun setPostion(position: Int) {
-        tvSure.tag = position
-    }
-
     fun singleButton() {
         tvCancel.visibility = View.GONE
         ivLine.visibility = View.GONE
@@ -82,7 +77,7 @@ class SmediaDialog(private var activity: Activity) : Dialog(activity), View.OnCl
      * 短信修改密码确认弹窗
      */
     fun showSmsMotifyPassword(password: String, OnClickListener: View.OnClickListener) {
-        setTitle(activity.resources.getString(R.string.surePass))
+        setTitle(context.resources.getString(R.string.surePass))
         setDesc(password)
         this.OnClickListener = OnClickListener
         show()
@@ -102,11 +97,11 @@ class SmediaDialog(private var activity: Activity) : Dialog(activity), View.OnCl
 
     //跳转登录弹窗
     fun showLogin() {
-        val intent = Intent(activity, LoginActivity::class.java)
+        val intent = Intent(context, LoginActivity::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+//            context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(context).toBundle())
         } else {
-            activity.startActivity(intent)
+            context.startActivity(intent)
         }
 //        setTitle("前往登录")
 //        setPositiveText("去登录")
@@ -135,8 +130,8 @@ class SmediaDialog(private var activity: Activity) : Dialog(activity), View.OnCl
         setPositiveText("现在前往")
         setCancelText("稍后")
 //        OnClickListener = View.OnClickListener {
-//            val intent = Intent(activity, ArchiveActivity::class.java)
-//            activity.startActivity(intent)
+//            val intent = Intent(context, ArchiveActivity::class.java)
+//            context.startActivity(intent)
 //        }
         show()
     }

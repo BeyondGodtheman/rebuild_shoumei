@@ -1,5 +1,6 @@
 package com.coco_sh.shmstore.home.view
 
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import com.coco_sh.shmstore.R
@@ -7,6 +8,7 @@ import com.coco_sh.shmstore.base.BaseActivity
 import com.coco_sh.shmstore.base.BaseFragment
 import com.coco_sh.shmstore.dialog.SmediaDialog
 import com.coco_sh.shmstore.login.manager.UserManager
+import com.coco_sh.shmstore.login.view.LoginActivity
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_menu.*
@@ -47,7 +49,7 @@ class MainActivity : BaseActivity() {
             }
             R.id.rlInCome -> {
                 if (!UserManager.isLogin()) {
-                    SmediaDialog(this).showLogin()
+                    startActivity(Intent(this,LoginActivity::class.java))
                     return
                 }
                 selectMenu(1)
@@ -55,7 +57,7 @@ class MainActivity : BaseActivity() {
 
             R.id.rlShoumei -> {
                 if (!UserManager.isLogin()) {
-                    SmediaDialog(this).showLogin()
+                    startActivity(Intent(this,LoginActivity::class.java))
                     return
                 }
                 selectMenu(2)
@@ -63,7 +65,7 @@ class MainActivity : BaseActivity() {
 
             R.id.rlMessage -> {
                 if (!UserManager.isLogin()) {
-                    SmediaDialog(this).showLogin()
+                    startActivity(Intent(this,LoginActivity::class.java))
                     return
                 }
                 selectMenu(3)

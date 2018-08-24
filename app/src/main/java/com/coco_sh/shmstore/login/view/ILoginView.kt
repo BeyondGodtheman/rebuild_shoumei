@@ -17,18 +17,9 @@ interface ILoginView : IBaseView {
     fun loginResult(result: BaseModel<Login>, isOtherLogin:Boolean)
 
     //返回历史帐号记录数据
-    fun onHistory(history: List<LoginHistory>)
+    fun onHistory(history: ArrayList<LoginHistory>)
 
-    //隐藏下拉菜单
-    fun gonePhone(history: LoginHistory)
-
-    //帐号输入框
-    fun getEditPhone():EditText
-
-    //密码输入框
-    fun getEditPass():EditText
-
-    //登录按钮
-    fun getBtnLogin():Button
+    //登录按钮状态
+    fun loginBtnState(boolean: Boolean)
 
 }
