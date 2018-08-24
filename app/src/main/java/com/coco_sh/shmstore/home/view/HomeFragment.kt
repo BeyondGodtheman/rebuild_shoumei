@@ -1,19 +1,16 @@
 package com.coco_sh.shmstore.home.view
 
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.TextView
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseActivity
-import com.coco_sh.shmstore.base.BasePresenter
 import com.coco_sh.shmstore.base.BaseFragment
-import com.coco_sh.shmstore.base.IBaseView
 import com.coco_sh.shmstore.home.presenter.HomePresenter
 import com.coco_sh.shmstore.utils.PermissionCode
 import com.coco_sh.shmstore.utils.PermissionUtil
 import kotlinx.android.synthetic.main.fragment_base.view.*
-import kotlinx.android.synthetic.main.layout_home_title.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.layout_home_title.*
 
 /**
  *首页Framgnet

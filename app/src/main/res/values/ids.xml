@@ -3,6 +3,7 @@
     <!--FrameLayout-->
     <item name="frameTitle" type="id" />
     <item name="frameBody" type="id" />
+    <item name="frameContent" type="id"/>
 
     <!--TextView-->
     <item name="tvTitle" type="id" />

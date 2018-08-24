@@ -1,25 +1,23 @@
 package com.coco_sh.shmstore.home.view
 
-import android.support.v4.app.FragmentManager
 import android.view.View
 import android.view.ViewGroup
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseActivity
+import com.coco_sh.shmstore.base.BaseFragment
 import com.coco_sh.shmstore.dialog.SmediaDialog
-import com.coco_sh.shmstore.home.presenter.MainPresenter
 import com.coco_sh.shmstore.login.manager.UserManager
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_menu.*
 
-class MainActivity : BaseActivity(), IMainView {
-
-    private var mainPresenter = MainPresenter(this)
+class MainActivity : BaseActivity() {
+    private var position = 0
+    private var lastPostion = -1
+    private val fragments = ArrayList<BaseFragment>()
 
     override fun setLayout(): Int = R.layout.activity_main
     override fun initView() {
-
-        mainPresenter.onCreate()
 
         frameTitle.visibility = View.GONE
         rlHome.setOnClickListener(this)
@@ -27,12 +25,16 @@ class MainActivity : BaseActivity(), IMainView {
         rlShoumei.setOnClickListener(this)
         rlMessage.setOnClickListener(this)
         rlMine.setOnClickListener(this)
+
+        val homeFragment = HomeFragment()
+        fragments.add(homeFragment)
+        selectMenu(0)
+
     }
 
     override fun update() {
     }
 
-    @Suppress("UNCHECKED_CAST")
     override fun loadData() {
 
     }
@@ -41,14 +43,14 @@ class MainActivity : BaseActivity(), IMainView {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.rlHome -> {
-                mainPresenter.selectTab(0)
+                selectMenu(0)
             }
             R.id.rlInCome -> {
                 if (!UserManager.isLogin()) {
                     SmediaDialog(this).showLogin()
                     return
                 }
-                mainPresenter.selectTab(1)
+                selectMenu(1)
             }
 
             R.id.rlShoumei -> {
@@ -56,7 +58,7 @@ class MainActivity : BaseActivity(), IMainView {
                     SmediaDialog(this).showLogin()
                     return
                 }
-                mainPresenter.selectTab(2)
+                selectMenu(2)
             }
 
             R.id.rlMessage -> {
@@ -64,34 +66,42 @@ class MainActivity : BaseActivity(), IMainView {
                     SmediaDialog(this).showLogin()
                     return
                 }
-                mainPresenter.selectTab(3)
+                selectMenu(3)
             }
             R.id.rlMine -> {
-                mainPresenter.selectTab(4)
+                selectMenu(4)
             }
 
         }
     }
 
-    override fun getMenuGroup(): ViewGroup = llgroup
 
-    override fun getHomeLayout(): View = rlHome
+    //切换底部菜单
+    private fun selectMenu(index: Int) {
+        position = index
 
-    override fun getIncomeLayout(): View = rlInCome
+        updateMenu(index)
+        if (lastPostion != -1) {
+            supportFragmentManager.beginTransaction().hide(fragments[lastPostion]).commit()
+        }
 
-    override fun getShouMeiLayout(): View = rlShoumei
+        if (supportFragmentManager.findFragmentByTag(fragments[index].javaClass.simpleName) == null) {
+            supportFragmentManager.beginTransaction().add(frameContent.id, fragments[index], fragments[index].javaClass.simpleName).commit()
+        } else {
+            supportFragmentManager.beginTransaction().show(fragments[index]).commit()
+        }
 
-    override fun getMineLayout(): View = rlMine
+        lastPostion = index
 
-    override fun getContentView(): View = flBottomTabFragmentContainer
-
-    override fun getMainManager(): FragmentManager = supportFragmentManager
-
-    override fun showLoading() {
     }
 
-    override fun hidenLoading() {
+    //更新底部菜单样式
+    private fun updateMenu(index: Int) {
+        for (i in 0 until (llParent as ViewGroup).childCount) {
+            (llParent as ViewGroup).getChildAt(i).isSelected = i == index
+        }
     }
+
 
     override fun close() {
 
