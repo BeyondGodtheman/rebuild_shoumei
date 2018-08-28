@@ -36,15 +36,6 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
 
     }
 
-    abstract fun setLayout(): Int
-
-    abstract fun initView()
-
-    abstract fun update()
-
-    abstract fun loadData()
-
-    abstract fun close()
 
     fun getLayoutView(): View? = mView
 
@@ -55,4 +46,20 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
         super.onDestroy()
         close()
     }
+
+
+    override fun onResume() {
+        super.onResume()
+        update()
+    }
+
+    abstract fun setLayout(): Int
+
+    abstract fun initView()
+
+    abstract fun update()
+
+    abstract fun loadData()
+
+    abstract fun close()
 }

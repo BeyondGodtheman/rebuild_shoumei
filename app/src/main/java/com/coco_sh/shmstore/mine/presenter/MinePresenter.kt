@@ -2,7 +2,11 @@ package com.coco_sh.shmstore.mine.presenter
 
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.SmApplication
+import com.coco_sh.shmstore.base.BaseModel
 import com.coco_sh.shmstore.base.BasePresenter
+import com.coco_sh.shmstore.http.ApiManager
+import com.coco_sh.shmstore.mine.data.MineLoader
+import com.coco_sh.shmstore.mine.model.CommonData
 import com.coco_sh.shmstore.mine.model.MineNavEntity
 import com.coco_sh.shmstore.mine.view.IMineView
 
@@ -13,19 +17,19 @@ import com.coco_sh.shmstore.mine.view.IMineView
 class MinePresenter(private var iMineView: IMineView?) : BasePresenter<IMineView>(iMineView) {
     private val topTitles = ArrayList<MineNavEntity>()
     private val bottomTitles = ArrayList<MineNavEntity>()
+    private var mineLoader: MineLoader? = null
 
     override fun onCreate() {
+
+        mineLoader = MineLoader(composites)
+
         topTitles.add(MineNavEntity(SmApplication.getApp().getString(R.string.iconMineCollection), "收藏"))
         topTitles.add(MineNavEntity(SmApplication.getApp().getString(R.string.iconMineWatch), "关注"))
         topTitles.add(MineNavEntity(SmApplication.getApp().getString(R.string.iconMineFan), "粉丝"))
         topTitles.add(MineNavEntity(SmApplication.getApp().getString(R.string.iconMineHome), "档案"))
 
         iMineView?.topNavData(topTitles)
-
-//        if (!UserManager.isLogin()){
         loadDefault()
-//        }
-
     }
 
 
@@ -40,9 +44,27 @@ class MinePresenter(private var iMineView: IMineView?) : BasePresenter<IMineView
         iMineView?.buttomNavData(bottomTitles)
     }
 
+    //加载通用数据
+    fun loadCommonData(){
+        iMineView?.showLoading()
+        mineLoader?.loadCommonData(object :ApiManager.OnResult<BaseModel<CommonData>>(){
+            override fun onSuccess(data: BaseModel<CommonData>) {
+                iMineView?.hidenLoading()
+                iMineView?.onCommonData(data)
+            }
+
+            override fun onFailed(code: String, message: String) {
+                iMineView?.hidenLoading()
+            }
+
+        })
+    }
+
+
+
     override fun onDistroy() {
         iMineView = null
-
+        mineLoader = null
     }
 
 }

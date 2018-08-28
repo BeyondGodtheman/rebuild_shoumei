@@ -26,12 +26,12 @@ class HeaderInterceptor : Interceptor {
     private fun getAuthorization(): String {
         if (UserManager.isLogin()) {
             val paramsArray = TreeMap<String, String>()
-            paramsArray["auth_session"] = "95270"
+            paramsArray["auth_session"] = UserManager.getUserId()
             paramsArray["app_id"] = "android_id"
-            paramsArray["timestamp"] = (System.currentTimeMillis() / 1000).toString()
+            paramsArray["timestamp"] = StringUtils.getTimeStamp()
             paramsArray["noncestr"] = StringUtils.getNoncestr()
             paramsArray["token"] = UserManager.getUserToken()
-            paramsArray["sid"] = "28"
+            paramsArray["sid"] = UserManager.getUserSid()
 
 
             val signStr = StringBuilder()

@@ -20,6 +20,8 @@ object Constant {
     const val SMEDIA_PHONE = "01078334322" //首媒客服电话
 
 
+    const val COMMON_DATA = "$VERSION/common/data" //通用接口（认证状态）
+
     const val REGISTER_SEND_CODE = "$VERSION/common/sms" //注册发送验证码
 
     const val COMMON_UPLOADS = "$VERSION/common/uploads" //上传文件

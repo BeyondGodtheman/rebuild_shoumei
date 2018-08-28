@@ -1,6 +1,7 @@
 package com.coco_sh.shmstore.login.manager
 
 import com.coco_sh.shmstore.login.model.Login
+import com.coco_sh.shmstore.mine.model.CommonData
 import com.coco_sh.shmstore.mine.model.Profile
 import com.coco_sh.shmstore.utils.SharedUtil
 import com.google.gson.Gson
@@ -16,6 +17,8 @@ object UserManager {
     private const val LOGIN = "login"
     //档案资料
     private const val PROFILE = "profile"
+    //通用数据
+    private const val COMMON = "common"
 
     /**
      * 获取用户ID
@@ -27,6 +30,12 @@ object UserManager {
      * 获取用户Token
      */
     fun getUserToken(): String = getLogin()?.access_token ?: ""
+
+
+    /**
+     * 获取用户SID
+     */
+    fun getUserSid():String = getLogin()?.sid?:""
 
 
     /**
@@ -48,9 +57,29 @@ object UserManager {
     }
 
     /**
+     * 存储通用信息
+     */
+    fun setCommon(profile: CommonData) {
+        SharedUtil.setString(COMMON, Gson().toJson(profile))
+    }
+
+
+    /**
+     * 获取通用信息
+     */
+    fun getCommon(): CommonData? {
+        val json = SharedUtil.getString(COMMON)
+        if (json != "") {
+            return Gson().fromJson(json, CommonData::class.java)
+        }
+        return null
+    }
+
+
+    /**
      * 存储档案信息
      */
-    fun setProfile(profile: Profile){
+    fun setProfile(profile: Profile) {
         SharedUtil.setString(PROFILE, Gson().toJson(profile))
     }
 
@@ -58,7 +87,7 @@ object UserManager {
     /**
      * 获取档案存储信息
      */
-    fun getProfile():Profile?{
+    fun getProfile(): Profile? {
         val json = SharedUtil.getString(LOGIN)
         if (json != "") {
             return Gson().fromJson(json, Profile::class.java)
@@ -73,6 +102,7 @@ object UserManager {
     fun setEmptyUser() {
         SharedUtil.remove(LOGIN)
         SharedUtil.remove(PROFILE)
+        SharedUtil.remove(COMMON)
     }
 
     /**
