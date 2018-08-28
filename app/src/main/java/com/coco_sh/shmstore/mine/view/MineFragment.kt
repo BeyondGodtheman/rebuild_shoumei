@@ -17,6 +17,7 @@ import com.coco_sh.shmstore.mine.model.MineNavEntity
 import com.coco_sh.shmstore.mine.presenter.MinePresenter
 import com.coco_sh.shmstore.title.TitleManager
 import com.coco_sh.shmstore.utils.GlideApp
+import com.coco_sh.shmstore.utils.LoadingUtil
 import com.coco_sh.shmstore.utils.RecycleViewDivider
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_base.view.*
@@ -26,22 +27,28 @@ import kotlinx.android.synthetic.main.layout_top_head.view.*
 
 class MineFragment : BaseFragment(), IMineView {
 
+    private var loadingUtil:LoadingUtil? = null
+
     private val minePresenter: MinePresenter by lazy {
         MinePresenter(this)
     }
 
     override fun showLoading() {
-
+        loadingUtil?.showLoading()
     }
 
     override fun hidenLoading() {
-
+        loadingUtil?.hidenLoading()
     }
 
 
     override fun setLayout(): Int = R.layout.fragment_mine
 
     override fun initView() {
+        getLayoutView()?.iframeBody?.let {
+            loadingUtil = LoadingUtil(it)
+        }
+
         immersionTitle() //title透明不占位
 
         getLayoutView()?.iframeTitle?.apply {
