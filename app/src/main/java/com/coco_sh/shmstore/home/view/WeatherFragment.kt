@@ -13,6 +13,8 @@ import com.coco_sh.shmstore.home.presenter.WeatherPresenter
  * Created by zhangye on 2018/8/3.
  */
 class WeatherFragment : BaseFragment(), IWeatherView {
+    override fun close() {
+    }
 
     override fun showLoading() {
     }

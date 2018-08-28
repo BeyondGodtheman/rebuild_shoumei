@@ -13,6 +13,9 @@ import com.coco_sh.shmstore.home.presenter.BonusMoneyPresenter
  * Created by zhangye on 2018/8/3.
  */
 class BonusMoneyFragment:BaseFragment(),IBonusMoneyView {
+    override fun close() {
+    }
+
     override fun showLoading() {
     }
 

@@ -1,6 +1,7 @@
 package com.coco_sh.shmstore.login.manager
 
 import com.coco_sh.shmstore.login.model.Login
+import com.coco_sh.shmstore.mine.model.Profile
 import com.coco_sh.shmstore.utils.SharedUtil
 import com.google.gson.Gson
 
@@ -13,8 +14,8 @@ import com.google.gson.Gson
 object UserManager {
     //存储用户信息
     private const val LOGIN = "login"
-    //我的页面入口数据
-    private const val MEMBERENTRANCE = "memberentrance"
+    //档案资料
+    private const val PROFILE = "profile"
 
     /**
      * 获取用户ID
@@ -46,13 +47,32 @@ object UserManager {
         return null
     }
 
+    /**
+     * 存储档案信息
+     */
+    fun setProfile(profile: Profile){
+        SharedUtil.setString(PROFILE, Gson().toJson(profile))
+    }
+
+
+    /**
+     * 获取档案存储信息
+     */
+    fun getProfile():Profile?{
+        val json = SharedUtil.getString(LOGIN)
+        if (json != "") {
+            return Gson().fromJson(json, Profile::class.java)
+        }
+        return null
+    }
+
 
     /**
      * 将所有本地数据置空
      */
     fun setEmptyUser() {
         SharedUtil.remove(LOGIN)
-        SharedUtil.remove(MEMBERENTRANCE)
+        SharedUtil.remove(PROFILE)
     }
 
     /**

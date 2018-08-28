@@ -28,15 +28,4 @@ class LoginLoader(private var composites: CompositeDisposable) {
             map["device"] =  SmApplication.getApp().getDeviceID()
             ApiManager.post(composites, map, Constant.LOGIN,onResult)
     }
-
-
-
-    /**
-     * 获取历史数据
-     */
-    fun getHistorys(): List<LoginHistory> {
-        val comparator = ComparatorGenerator<LoginHistory>(LoginHistory::class.java).generate()
-        return SmApplication.getApp().dataStorage.loadAll(LoginHistory::class.java, comparator)
-    }
-
 }

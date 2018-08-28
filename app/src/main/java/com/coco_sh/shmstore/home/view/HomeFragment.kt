@@ -16,6 +16,8 @@ import kotlinx.android.synthetic.main.layout_home_title.*
  *首页Framgnet
  */
 class HomeFragment : BaseFragment(), IHomeView {
+    override fun close() {
+    }
 
     private var permissionUtil: PermissionUtil? = null
 

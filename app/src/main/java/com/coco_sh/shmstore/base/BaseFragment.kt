@@ -44,8 +44,15 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
 
     abstract fun loadData()
 
+    abstract fun close()
+
     fun getLayoutView(): View? = mView
 
     fun getBaseActivity(): BaseActivity = activity as BaseActivity
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        close()
+    }
 }
