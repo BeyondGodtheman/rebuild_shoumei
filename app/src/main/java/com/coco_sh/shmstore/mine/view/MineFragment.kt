@@ -4,7 +4,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseFragment
