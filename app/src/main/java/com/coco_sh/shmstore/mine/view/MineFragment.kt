@@ -73,7 +73,8 @@ class MineFragment : BaseFragment(), IMineView {
             getLayoutView()?.tvName?.text = ""
             minePresenter.loadCommonData() //加载数据
         } else {
-            getLayoutView()?.ivHead?.setImageResource(R.drawable.bg_update_head)
+            getLayoutView()?.ivHead?.setImageResource(R.drawable.bg_update_head) //默认头像
+            getLayoutView()?.ivBg?.setImageResource(R.mipmap.bg_top_head) //默认背景图
             getLayoutView()?.tvName?.text = getString(R.string.visitor)
             getLayoutView()?.tvNo?.visibility = View.GONE
         }
