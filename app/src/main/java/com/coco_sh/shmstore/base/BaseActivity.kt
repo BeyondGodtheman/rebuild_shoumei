@@ -69,6 +69,12 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        update()
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         close()

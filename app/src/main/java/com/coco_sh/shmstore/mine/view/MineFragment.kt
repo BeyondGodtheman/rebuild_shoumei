@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.layout_top_head.view.*
 
 class MineFragment : BaseFragment(), IMineView {
 
-    private var loadingUtil:LoadingUtil? = null
+    private var loadingUtil: LoadingUtil? = null
 
     private val minePresenter: MinePresenter by lazy {
         MinePresenter(this)
@@ -55,14 +55,18 @@ class MineFragment : BaseFragment(), IMineView {
             addView(TitleManager(getBaseActivity()).mineTitle()) //加载title
         }
         getLayoutView()?.recycleTopNav?.setHasFixedSize(true)
+        //分割线
         getLayoutView()?.recycleTopNav?.addItemDecoration(
-                RecycleViewDivider(getBaseActivity(), LinearLayoutManager.VERTICAL, resources.getDimension(R.dimen.h3).toInt(), ContextCompat.getColor(getBaseActivity(), R.color.graye0))
-        ) //分割线
+                RecycleViewDivider(getBaseActivity(), LinearLayoutManager.VERTICAL, resources.getDimension(R.dimen.h3).toInt(),
+                        ContextCompat.getColor(getBaseActivity(), R.color.graye0))
+        )
 
         getLayoutView()?.recycleBottomNav?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        //分割线
         getLayoutView()?.recycleBottomNav?.addItemDecoration(
-                RecycleViewDivider(getBaseActivity(), LinearLayoutManager.HORIZONTAL, resources.getDimension(R.dimen.h3).toInt(), ContextCompat.getColor(getBaseActivity(), R.color.graye0))
-        ) //分割线
+                RecycleViewDivider(getBaseActivity(), LinearLayoutManager.HORIZONTAL, resources.getDimension(R.dimen.h3).toInt(),
+                        ContextCompat.getColor(getBaseActivity(), R.color.graye0))
+        )
 
         minePresenter.onCreate()
     }
