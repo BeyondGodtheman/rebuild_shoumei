@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.RelativeLayout
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseActivity
+import com.coco_sh.shmstore.login.manager.UserManager
+import com.coco_sh.shmstore.login.view.LoginActivity
 import com.coco_sh.shmstore.setting.SettingActivity
 import kotlinx.android.synthetic.main.layout_default_title.view.*
 
@@ -18,7 +20,7 @@ class TitleManager(private var baseActivity: BaseActivity) {
     fun defaultTitle(title: String): View {
         val view = View.inflate(baseActivity, R.layout.layout_default_title, null)
         view.tvTitle.text = title
-        view.setOnClickListener(getBackClickListener())
+        view.tvLeft.setOnClickListener(getBackClickListener())
         return view
     }
 
@@ -40,7 +42,11 @@ class TitleManager(private var baseActivity: BaseActivity) {
         view.tvRight.text = baseActivity.getString(R.string.iconSetting)
         view.tvRight.setTextColor(ContextCompat.getColor(baseActivity, R.color.white))
         view.tvRight.setOnClickListener {
-            baseActivity.startActivity(Intent(baseActivity, SettingActivity::class.java))
+            if (UserManager.isLogin()){
+                baseActivity.startActivity(Intent(baseActivity, SettingActivity::class.java))
+            }else{
+                baseActivity.startActivity(Intent(baseActivity, LoginActivity::class.java))
+            }
         }
         return view
     }
