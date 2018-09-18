@@ -82,7 +82,12 @@
 
         <!--设置页面-->
         <activity
-            android:name=".setting.SettingActivity"
+            android:name=".setting.view.SettingActivity"
+            android:launchMode="singleTop" />
+
+        <!--关于首媒-->
+        <activity
+            android:name=".setting.view.AboutActivity"
             android:launchMode="singleTop" />
     </application>
 

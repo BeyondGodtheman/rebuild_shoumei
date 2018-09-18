@@ -1,11 +1,11 @@
 package com.coco_sh.shmstore.regist.data
 
-import android.annotation.SuppressLint
 import com.coco_sh.shmstore.SmApplication
 import com.coco_sh.shmstore.base.BaseModel
 import com.coco_sh.shmstore.http.ApiManager
 import com.coco_sh.shmstore.http.Constant
 import com.coco_sh.shmstore.login.model.Login
+import com.coco_sh.shmstore.utils.DigestUtils
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -14,11 +14,10 @@ import io.reactivex.disposables.CompositeDisposable
  */
 class RegisterLoader(private var composites: CompositeDisposable) {
 
-    @SuppressLint("HardwareIds")
     fun regist(phone: String, smscode: String, passwd: String, smskey: String, onResult: ApiManager.OnResult<BaseModel<Login>>) {
         val map = HashMap<String, String>()
         map["phone"] = phone
-        map["passwd"] = passwd
+        map["passwd"] = DigestUtils.md5(passwd)
         map["smscode"] = smscode
         map["smskey"] = smskey
         map["client"] = Constant.CLIENT

@@ -112,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:nameText="清理缓存"
-            app:valueText="0.00MB" />
+            app:valueText="0B" />
 
         <com.coco_sh.shmstore.widget.itemview.ItemShowView
             android:id="@+id/isvAbout"

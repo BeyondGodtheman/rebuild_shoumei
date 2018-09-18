@@ -115,10 +115,16 @@ class MineFragment : BaseFragment(), IMineView {
             getLayoutView()?.ivHead?.let {
                 GlideApp.with(this).load(data.message?.avatar).placeholder(R.drawable.bg_update_head).into(it)
             }
-            getLayoutView()?.ivBg?.let {
-                GlideApp.with(this).load(data.message?.avatar)
-                        .apply(RequestOptions.bitmapTransform(BlurTransformation(2, 10)))
-                        .into(it)
+
+            if (data.message?.avatar.isNullOrEmpty()) {
+                getLayoutView()?.ivBg?.setImageResource(R.mipmap.bg_top_head)
+            } else {
+                getLayoutView()?.ivBg?.let {
+                    GlideApp.with(this)
+                            .load(data.message?.avatar)
+                            .apply(RequestOptions.bitmapTransform(BlurTransformation(2, 10)))
+                            .into(it)
+                }
             }
         }
     }

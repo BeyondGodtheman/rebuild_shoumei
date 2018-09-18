@@ -35,7 +35,7 @@ object UserManager {
     /**
      * 获取用户SID
      */
-    fun getUserSid():String = getLogin()?.sid?:""
+    fun getUserSid(): String = getLogin()?.sid ?: ""
 
 
     /**
@@ -73,6 +73,17 @@ object UserManager {
             return Gson().fromJson(json, CommonData::class.java)
         }
         return null
+    }
+
+
+    fun getCryptogramPhone(): String {
+        val sb = StringBuilder()
+        getCommon()?.phone?.let {
+            sb.append(it.substring(0, 3))
+            sb.append("****")
+            sb.append(it.substring(7, 11))
+        }
+        return sb.toString()
     }
 
 

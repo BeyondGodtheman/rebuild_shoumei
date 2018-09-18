@@ -8,7 +8,7 @@ import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseActivity
 import com.coco_sh.shmstore.login.manager.UserManager
 import com.coco_sh.shmstore.login.view.LoginActivity
-import com.coco_sh.shmstore.setting.SettingActivity
+import com.coco_sh.shmstore.setting.view.SettingActivity
 import kotlinx.android.synthetic.main.layout_default_title.view.*
 
 /**
