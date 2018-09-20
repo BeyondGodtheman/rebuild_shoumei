@@ -1,5 +1,6 @@
 package com.coco_sh.shmstore.setting.presenter
 
+import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.SmApplication
 import com.coco_sh.shmstore.base.BasePresenter
 import com.coco_sh.shmstore.setting.view.ISettingView
@@ -30,13 +31,13 @@ class SettingPresenter(private var iSettingView: ISettingView?) : BasePresenter<
     fun getCacheSize() {
         var size = 0L
         iSettingView?.showLoading()
-        //启动协程
+        //创建协程
         val countJob = async {
             size += fileUtlis?.getCacheSize() ?: 0
         }
 
         launch(UI) {
-            //协程挂起，等待执行结果
+            //启动协程并挂起，等待执行结果
             countJob.await()
             iSettingView?.hidenLoading()
             fileUtlis?.formetFileSize(size)?.let {
@@ -48,16 +49,16 @@ class SettingPresenter(private var iSettingView: ISettingView?) : BasePresenter<
     //清理缓存
     fun clearCache() {
         iSettingView?.showLoading()
-        //启动协程
+        //创建协程
         val deleteJob = async {
             fileUtlis?.deleteAllFile()
         }
         launch(UI) {
-            //协程挂起，等待执行结果
+            //启动协程并挂起，等待执行结果
             deleteJob.await()
             GlideApp.get(SmApplication.getApp()).clearMemory()
             iSettingView?.hidenLoading()
-            iSettingView?.showMessage("清理完成!")
+            iSettingView?.showMessage(SmApplication.getApp().getString(R.string.clearComplete))
             getCacheSize()
         }
     }
