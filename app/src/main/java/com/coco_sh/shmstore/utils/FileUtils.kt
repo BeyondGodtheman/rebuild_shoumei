@@ -1,5 +1,6 @@
 package com.coco_sh.shmstore.utils
 
+import android.os.Environment
 import com.coco_sh.shmstore.SmApplication
 import java.io.File
 import java.text.DecimalFormat
@@ -7,15 +8,34 @@ import java.text.DecimalFormat
 /**
  * 文件操作相关工具类
  */
-class FileUtlis {
+class FileUtils {
+
+    /**
+     * 获取换成你文件路径
+     */
+    fun getCacheDir(): File {
+        val file = File(Environment.getExternalStorageDirectory(), "${SmApplication.getApp().packageName}/temp")
+        if (!file.exists()){
+            file.mkdirs()
+        }
+        return file
+    }
 
 
-    fun getCacheDir() = SmApplication.getApp().cacheDir
+    /**
+     * 根据文件名获取文件
+     */
+    fun getFile(name: String): File {
+        return File(getCacheDir(), name)
+    }
 
 
+    /**
+     * 获取目录缓存大小
+     */
     fun getCacheSize(): Long {
         var size = 0L
-        size += getFolderSize(SmApplication.getApp().cacheDir)
+        size += getFolderSize(getCacheDir())
         return size
     }
 
@@ -26,7 +46,7 @@ class FileUtlis {
      * @param fileS
      * @return
      */
-    fun formetFileSize(fileS: Long): String {
+    fun formatFileSize(fileS: Long): String {
         val df = DecimalFormat("#.00")
         val fileSizeString: String
         val wrongSize = "0B"
@@ -85,7 +105,7 @@ class FileUtlis {
             for (file1 in files) {
                 deleteFolderFile(file1.absolutePath)
             }
-        }else{
+        } else {
             file.delete()
         }
     }

@@ -1,14 +1,17 @@
 package com.coco_sh.shmstore.mine.view
 
+import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.bumptech.glide.request.RequestOptions
 import com.coco_sh.shmstore.R
+import com.coco_sh.shmstore.archives.view.ArchivesActivity
 import com.coco_sh.shmstore.base.BaseFragment
 import com.coco_sh.shmstore.base.BaseModel
 import com.coco_sh.shmstore.login.manager.UserManager
+import com.coco_sh.shmstore.login.view.LoginActivity
 import com.coco_sh.shmstore.mine.adapter.MineBottomNavAdapter
 import com.coco_sh.shmstore.mine.adapter.MineTopNavAdapter
 import com.coco_sh.shmstore.mine.model.CommonData
@@ -36,7 +39,7 @@ class MineFragment : BaseFragment(), IMineView {
         loadingUtil?.showLoading()
     }
 
-    override fun hidenLoading() {
+    override fun hideLoading() {
         loadingUtil?.hidenLoading()
     }
 
@@ -57,18 +60,21 @@ class MineFragment : BaseFragment(), IMineView {
         getLayoutView()?.recycleTopNav?.setHasFixedSize(true)
         //分割线
         getLayoutView()?.recycleTopNav?.addItemDecoration(
-                RecycleViewDivider(getBaseActivity(), LinearLayoutManager.VERTICAL, resources.getDimension(R.dimen.h3).toInt(),
-                        ContextCompat.getColor(getBaseActivity(), R.color.graye0))
+                RecycleViewDivider(getBaseActivity(), LinearLayoutManager.VERTICAL, resources.getDimension(R.dimen.h2).toInt(),
+                        ContextCompat.getColor(getBaseActivity(), R.color.grayE0))
         )
 
         getLayoutView()?.recycleBottomNav?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         //分割线
         getLayoutView()?.recycleBottomNav?.addItemDecoration(
-                RecycleViewDivider(getBaseActivity(), LinearLayoutManager.HORIZONTAL, resources.getDimension(R.dimen.h3).toInt(),
-                        ContextCompat.getColor(getBaseActivity(), R.color.graye0))
+                RecycleViewDivider(getBaseActivity(), LinearLayoutManager.HORIZONTAL, resources.getDimension(R.dimen.h2).toInt(),
+                        ContextCompat.getColor(getBaseActivity(), R.color.grayE0))
         )
 
+        getLayoutView()?.ivHead?.setOnClickListener(this)
+
         minePresenter.onCreate()
+
     }
 
 
@@ -88,8 +94,18 @@ class MineFragment : BaseFragment(), IMineView {
 
     }
 
-    override fun onClick(p0: View?) {
+    override fun onClick(view: View) {
+        when(view.id){
+            getLayoutView()?.ivHead?.id -> {
+                //跳转档案
+                if (UserManager.isLogin()){
+                    startActivity(Intent(context,ArchivesActivity::class.java))
+                }else{
+                    startActivity(Intent(context,LoginActivity::class.java))
+                }
+            }
 
+        }
     }
 
 
@@ -131,6 +147,6 @@ class MineFragment : BaseFragment(), IMineView {
 
 
     override fun close() {
-        minePresenter.onDistroy()
+        minePresenter.onDestroy()
     }
 }

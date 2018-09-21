@@ -4,7 +4,7 @@ import android.content.Intent
 import android.view.View
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseActivity
-import com.coco_sh.shmstore.dialog.SmediaDialog
+import com.coco_sh.shmstore.widget.dialog.SmediaDialog
 import com.coco_sh.shmstore.login.manager.UserManager
 import com.coco_sh.shmstore.setting.presenter.SettingPresenter
 import com.coco_sh.shmstore.title.TitleManager

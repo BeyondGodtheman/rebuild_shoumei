@@ -32,7 +32,7 @@ class RegisterActivity : BaseActivity(), IRegisterView {
         loadingUtil.showLoading()
     }
 
-    override fun hidenLoading() {
+    override fun hideLoading() {
         loadingUtil.hidenLoading()
     }
 
@@ -157,7 +157,7 @@ class RegisterActivity : BaseActivity(), IRegisterView {
 
 
     override fun close() {
-        registerPresenter.onDistroy()
+        registerPresenter.onDestroy()
     }
 
 }

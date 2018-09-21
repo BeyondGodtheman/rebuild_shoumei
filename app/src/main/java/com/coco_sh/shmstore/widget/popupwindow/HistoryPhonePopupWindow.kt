@@ -8,7 +8,7 @@ import android.widget.PopupWindow
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.SmApplication
 import com.coco_sh.shmstore.click.OnItemClickListener
-import com.coco_sh.shmstore.dialog.SmediaDialog
+import com.coco_sh.shmstore.widget.dialog.SmediaDialog
 import com.coco_sh.shmstore.login.model.LoginHistory
 import com.coco_sh.shmstore.widget.popupwindow.adapter.PhoneHistoryAdapter
 import kotlinx.android.synthetic.main.layout_phone_history.view.*

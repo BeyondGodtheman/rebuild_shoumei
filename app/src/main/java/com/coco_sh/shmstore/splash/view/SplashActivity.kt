@@ -26,7 +26,7 @@ class SplashActivity : BaseActivity(), ISplashView {
     override fun showLoading() {
     }
 
-    override fun hidenLoading() {
+    override fun hideLoading() {
     }
 
     override fun setLayout(): Int = R.layout.activity_splash
@@ -52,6 +52,6 @@ class SplashActivity : BaseActivity(), ISplashView {
     }
 
     override fun close() {
-        splashActivityPresenter.onDistroy()
+        splashActivityPresenter.onDestroy()
     }
 }

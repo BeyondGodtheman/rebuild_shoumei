@@ -12,6 +12,11 @@ abstract class BasePresenter<T:IBaseView>(var view: T?) {
 
     abstract fun onCreate()
 
-    abstract fun onDistroy()
+    abstract fun onClose()
+
+    fun onDestroy(){
+        composites.dispose()
+        onClose()
+    }
 
 }

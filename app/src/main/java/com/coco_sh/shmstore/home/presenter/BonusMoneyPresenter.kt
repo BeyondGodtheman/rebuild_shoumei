@@ -8,11 +8,11 @@ import com.coco_sh.shmstore.home.view.IBonusMoneyView
  * Created by zhangye on 2018/8/3.
  */
 class BonusMoneyPresenter(private var iBonusMoneyView: IBonusMoneyView) : BasePresenter<IBonusMoneyView>(iBonusMoneyView) {
-    override fun onCreate() {
-
+    override fun onClose() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onDistroy() {
+    override fun onCreate() {
 
     }
 }

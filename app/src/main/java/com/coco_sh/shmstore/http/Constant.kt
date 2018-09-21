@@ -13,7 +13,7 @@ object Constant {
 
     var SHOWLOG = true //是否打印LOG
 
-    const val APPSECRET = "SM_ANDROID" //接口SECRET
+    const val APP_SECRET = "SM_ANDROID" //接口SECRET
     const val VERSION = "v1"  //接口版本
     const val CLIENT = "android"
 
@@ -31,5 +31,9 @@ object Constant {
     const val LOGIN = "$VERSION/portal/login"//登录
 
     const val FORGOTPWD = "$VERSION/portal/forgotpwd" //忘记密码
+
+    const val PROFILE = "$VERSION/profile" //档案接口
+
+    const val PROFILE_UPDATE = "$VERSION/profile/update" //更新档案
 }
 

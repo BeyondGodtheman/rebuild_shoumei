@@ -128,7 +128,7 @@ class ForgetPassPresenter(private var iForgetPassView: IForgetPassView?) : BaseP
         )
     }
 
-    override fun onDistroy() {
+    override fun onClose() {
         iForgetPassView = null
         forgetPassLoader = null
         smsLoader = null

@@ -4,7 +4,7 @@ import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.SmApplication
 import com.coco_sh.shmstore.base.BasePresenter
 import com.coco_sh.shmstore.setting.view.ISettingView
-import com.coco_sh.shmstore.utils.FileUtlis
+import com.coco_sh.shmstore.utils.FileUtils
 import com.coco_sh.shmstore.utils.GlideApp
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
@@ -16,14 +16,14 @@ import kotlinx.coroutines.experimental.launch
  */
 class SettingPresenter(private var iSettingView: ISettingView?) : BasePresenter<ISettingView>(iSettingView) {
 
-    private var fileUtlis: FileUtlis? = null
+    private var fileUtils: FileUtils? = null
 
     override fun onCreate() {
-        fileUtlis = FileUtlis()
+        fileUtils = FileUtils()
     }
 
-    override fun onDistroy() {
-        fileUtlis = null
+    override fun onClose() {
+        fileUtils = null
         iSettingView = null
     }
 
@@ -33,14 +33,14 @@ class SettingPresenter(private var iSettingView: ISettingView?) : BasePresenter<
         iSettingView?.showLoading()
         //创建协程
         val countJob = async {
-            size += fileUtlis?.getCacheSize() ?: 0
+            size += fileUtils?.getCacheSize() ?: 0
         }
 
         launch(UI) {
             //启动协程并挂起，等待执行结果
             countJob.await()
-            iSettingView?.hidenLoading()
-            fileUtlis?.formetFileSize(size)?.let {
+            iSettingView?.hideLoading()
+            fileUtils?.formatFileSize(size)?.let {
                 iSettingView?.showCacheSize(it)
             }
         }
@@ -51,13 +51,13 @@ class SettingPresenter(private var iSettingView: ISettingView?) : BasePresenter<
         iSettingView?.showLoading()
         //创建协程
         val deleteJob = async {
-            fileUtlis?.deleteAllFile()
+            fileUtils?.deleteAllFile()
         }
         launch(UI) {
             //启动协程并挂起，等待执行结果
             deleteJob.await()
             GlideApp.get(SmApplication.getApp()).clearMemory()
-            iSettingView?.hidenLoading()
+            iSettingView?.hideLoading()
             iSettingView?.showMessage(SmApplication.getApp().getString(R.string.clearComplete))
             getCacheSize()
         }

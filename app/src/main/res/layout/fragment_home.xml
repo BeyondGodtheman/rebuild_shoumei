@@ -12,7 +12,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/h2"
-        android:background="@color/graye0" />
+        android:background="@color/grayE0" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,7 +104,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/h2"
-        android:background="@color/graye0" />
+        android:background="@color/grayE0" />
 
     <com.coco_sh.shmstore.home.widget.HomeBottomView
         android:id="@+id/homeBottomView"

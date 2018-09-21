@@ -9,7 +9,7 @@
             <solid android:color="@android:color/transparent" />
             <stroke
                 android:width="@dimen/h4"
-                android:color="@color/grayd" />
+                android:color="@color/grayD" />
             <padding android:bottom="4dp" />
         </shape>
     </item>

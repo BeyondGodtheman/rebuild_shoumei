@@ -29,8 +29,7 @@ class HomePresenter(private var iHomeView: IHomeView) : BasePresenter<IHomeView>
     }
 
 
-    override fun onDistroy() {
+    override fun onClose() {
         locationUtil = null
     }
-
 }

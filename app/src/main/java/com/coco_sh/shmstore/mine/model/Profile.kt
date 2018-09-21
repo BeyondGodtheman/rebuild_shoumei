@@ -10,7 +10,7 @@ data class Profile(
         var nickname: String, // 昵称
         var realname: String, // 真实姓名
         var birth: String, // 生日,格式:'Y-m-d'
-        var gender: Int, // 性别:'0'-女,'1'-男,'2'-未知
+        var gender: String, // 性别:'0'-女,'1'-男,'2'-未知
         var province: String, // 省份地区代码
         var city: String, // 城市地区代码
         var town: String, // 区县地区代码

@@ -6,7 +6,7 @@ import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseActivity
 import com.coco_sh.shmstore.base.BaseFragment
 import com.coco_sh.shmstore.home.presenter.HomePresenter
-import com.coco_sh.shmstore.utils.PermissionCode
+import com.coco_sh.shmstore.utils.IntentCode
 import com.coco_sh.shmstore.utils.PermissionUtil
 import kotlinx.android.synthetic.main.fragment_base.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment(), IHomeView {
     override fun showLoading() {
     }
 
-    override fun hidenLoading() {
+    override fun hideLoading() {
     }
 
     override fun setLayout(): Int = R.layout.fragment_home
@@ -188,7 +188,7 @@ class HomeFragment : BaseFragment(), IHomeView {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PermissionCode.LOCATION.type) {
+        if (requestCode == IntentCode.LOCATION) {
             if (permissionUtil?.checkPermission(permissions) == true) {
                 homePresenter.startLocation() //启动定位
             }

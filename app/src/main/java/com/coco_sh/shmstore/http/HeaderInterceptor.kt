@@ -46,7 +46,7 @@ class HeaderInterceptor : Interceptor {
             authorizationStr.append(paramsArray["timestamp"]).append("/")
             authorizationStr.append(paramsArray["noncestr"]).append("/")
             authorizationStr.append(paramsArray["sid"]).append("/")
-            authorizationStr.append(DigestUtils.md5(signStr.toString() + Constant.APPSECRET))
+            authorizationStr.append(DigestUtils.md5(signStr.toString() + Constant.APP_SECRET))
             return authorizationStr.toString()
         }
         return ""

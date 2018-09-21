@@ -8,10 +8,10 @@ import android.widget.Button
 import android.widget.EditText
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseActivity
-import com.coco_sh.shmstore.dialog.SmediaDialog
+import com.coco_sh.shmstore.widget.dialog.SmediaDialog
 import com.coco_sh.shmstore.forget.presenter.ForgetPassPresenter
 import com.coco_sh.shmstore.http.Constant
-import com.coco_sh.shmstore.utils.PermissionCode
+import com.coco_sh.shmstore.utils.IntentCode
 import com.coco_sh.shmstore.utils.PermissionUtil
 import com.coco_sh.shmstore.widget.button.TimerButton
 import kotlinx.android.synthetic.main.activity_base.*
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_forget_pass.*
  */
 class ForgetPassActivity : BaseActivity(), IForgetPassView {
     override fun close() {
-        forgetPassPresenter.onDistroy()
+        forgetPassPresenter.onDestroy()
     }
 
     private var permissionUtil: PermissionUtil? = null
@@ -77,7 +77,7 @@ class ForgetPassActivity : BaseActivity(), IForgetPassView {
     }
 
 
-    override fun hidenLoading() {
+    override fun hideLoading() {
     }
 
     override fun getEditPhone(): EditText = editPhone
@@ -102,7 +102,7 @@ class ForgetPassActivity : BaseActivity(), IForgetPassView {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PermissionCode.PHONE.type) {
+        if (requestCode == IntentCode.PHONE) {
             if (permissionUtil?.checkPermission(permissions) == true) {
                 callPhone()
             }

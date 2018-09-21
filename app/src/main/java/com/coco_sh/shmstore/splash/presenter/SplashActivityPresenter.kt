@@ -25,7 +25,7 @@ class SplashActivityPresenter(private var iSplashView: ISplashView) : BasePresen
         }
     }
 
-    override fun onDistroy() {
+    override fun onClose() {
         job?.cancel()
     }
 }

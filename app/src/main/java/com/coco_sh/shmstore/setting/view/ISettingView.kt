@@ -10,7 +10,7 @@ interface ISettingView : IBaseView {
     override fun showLoading() {
     }
 
-    override fun hidenLoading() {
+    override fun hideLoading() {
     }
 
     //显示缓存数量

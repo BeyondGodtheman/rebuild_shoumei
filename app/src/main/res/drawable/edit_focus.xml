@@ -10,7 +10,7 @@
             <solid android:color="@android:color/transparent" />
             <stroke
                 android:width="@dimen/h4"
-                android:color="@color/graybf" />
+                android:color="@color/grayBF" />
             <padding android:bottom="4dp" />
 
         </shape>

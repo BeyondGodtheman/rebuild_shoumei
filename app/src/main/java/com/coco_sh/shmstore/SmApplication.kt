@@ -1,19 +1,19 @@
 package com.coco_sh.shmstore
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.graphics.Typeface
 import android.provider.Settings
+import android.support.multidex.MultiDexApplication
 import com.coco_sh.shmstore.utils.DigestUtils
 import xiaofei.library.datastorage.DataStorageFactory
 import xiaofei.library.datastorage.IDataStorage
-import java.util.HashMap
+import java.util.*
 
 /**
  * 应用类
  * Created by zhangye on 2018/8/2.
  */
-class SmApplication : Application() {
+class SmApplication : MultiDexApplication() {
     private val storeMap = HashMap<String, Any>() //内存数据存储
     lateinit var dataStorage: IDataStorage //持久化数据存储
     lateinit var iconFontType: Typeface  //字体图库

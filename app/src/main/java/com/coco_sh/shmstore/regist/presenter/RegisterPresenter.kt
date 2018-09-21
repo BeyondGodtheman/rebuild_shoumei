@@ -42,13 +42,13 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
         registerView?.showLoading()
         smsLoader?.sendCode(phone, smsType, object : ApiManager.OnResult<BaseModel<SmSMS>>() {
             override fun onSuccess(data: BaseModel<SmSMS>) {
-                registerView?.hidenLoading()
+                registerView?.hideLoading()
                 smsKey = data.message?.smskey ?: ""
                 registerView?.snedSMSResult(data)
             }
 
             override fun onFailed(code: String, message: String) {
-                registerView?.hidenLoading()
+                registerView?.hideLoading()
             }
         })
 
@@ -69,7 +69,7 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
         registerView?.showLoading()
         registerLoader?.regist(phone, code, password, smsKey, object : ApiManager.OnResult<BaseModel<Login>>() {
             override fun onSuccess(data: BaseModel<Login>) {
-                registerView?.hidenLoading()
+                registerView?.hideLoading()
                 data.message?.let {
                     val loginHistory = LoginHistory(phone)
                     SmApplication.getApp().dataStorage.storeOrUpdate(loginHistory) //保存登录历史记录
@@ -79,7 +79,7 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
             }
 
             override fun onFailed(code: String, message: String) {
-                registerView?.hidenLoading()
+                registerView?.hideLoading()
             }
 
         })
@@ -135,7 +135,7 @@ class RegisterPresenter(private var registerView: IRegisterView?) : BasePresente
     }
 
 
-    override fun onDistroy() {
+    override fun onClose() {
         registerLoader = null
         registerView = null
     }

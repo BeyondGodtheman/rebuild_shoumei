@@ -10,7 +10,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/w2"
-        android:background="@color/graye0" />
+        android:background="@color/grayE0" />
 
     <LinearLayout
         android:id="@+id/llgroup"

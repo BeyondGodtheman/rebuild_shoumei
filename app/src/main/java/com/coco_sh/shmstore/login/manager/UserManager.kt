@@ -99,7 +99,7 @@ object UserManager {
      * 获取档案存储信息
      */
     fun getProfile(): Profile? {
-        val json = SharedUtil.getString(LOGIN)
+        val json = SharedUtil.getString(PROFILE)
         if (json != "") {
             return Gson().fromJson(json, Profile::class.java)
         }

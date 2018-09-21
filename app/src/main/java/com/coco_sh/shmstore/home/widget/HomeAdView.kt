@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.Scroller
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.click.OnItemClickListener
-import com.coco_sh.shmstore.dialog.SmediaDialog
+import com.coco_sh.shmstore.widget.dialog.SmediaDialog
 import com.coco_sh.shmstore.home.adapter.HomeBannerAdapter
 import com.coco_sh.shmstore.home.model.Banner
 import com.coco_sh.shmstore.login.manager.UserManager

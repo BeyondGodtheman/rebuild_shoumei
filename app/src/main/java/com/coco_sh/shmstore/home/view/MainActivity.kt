@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import com.coco_sh.shmstore.R
 import com.coco_sh.shmstore.base.BaseActivity
 import com.coco_sh.shmstore.base.BaseFragment
-import com.coco_sh.shmstore.dialog.SmediaDialog
 import com.coco_sh.shmstore.income.IncomeFragment
 import com.coco_sh.shmstore.login.manager.UserManager
 import com.coco_sh.shmstore.login.view.LoginActivity

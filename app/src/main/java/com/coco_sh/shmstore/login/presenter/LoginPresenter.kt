@@ -17,6 +17,7 @@ import xiaofei.library.comparatorgenerator.ComparatorGenerator
  * Created by zhangye on 2018/8/2.
  */
 class LoginPresenter(private var iLoginView: ILoginView?) : BasePresenter<IBaseView>(iLoginView) {
+
     private var phoneOK = false
     private var passOK = false
     private var loginLoader: LoginLoader? = null
@@ -78,7 +79,7 @@ class LoginPresenter(private var iLoginView: ILoginView?) : BasePresenter<IBaseV
     }
 
 
-    override fun onDistroy() {
+    override fun onClose() {
         iLoginView = null
         loginLoader = null
     }

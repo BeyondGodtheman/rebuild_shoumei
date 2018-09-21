@@ -11,13 +11,13 @@
         android:id="@+id/recycleTopNav"
         android:layout_width="match_parent"
         android:layout_height="@dimen/h230"
-        android:background="@color/grayfa"
+        android:background="@color/grayFA"
         android:overScrollMode="never"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/h3"
-        android:background="@color/graye0"
+        android:background="@color/grayE0"
         android:layout_marginBottom="@dimen/h10"/>
 
     <android.support.v7.widget.RecyclerView

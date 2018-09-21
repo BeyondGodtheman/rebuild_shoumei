@@ -57,7 +57,7 @@ class HomeBottomView : RelativeLayout {
             }
 
             override fun onPageSelected(position: Int) {
-                pointList[currentPosition].setBackgroundResource(R.color.graye0)
+                pointList[currentPosition].setBackgroundResource(R.color.grayE0)
                 pointList[position].setBackgroundResource(R.color.red)
                 currentPosition = position
             }
@@ -161,7 +161,7 @@ class HomeBottomView : RelativeLayout {
         for (i in 0 until fragments.size) {
             val view = View(context)
             view.alpha = 0.8f
-            view.setBackgroundResource(R.color.graye0)
+            view.setBackgroundResource(R.color.grayE0)
             llayoutPoint.addView(view, pointLayoutParams)
             pointList.add(view)
         }

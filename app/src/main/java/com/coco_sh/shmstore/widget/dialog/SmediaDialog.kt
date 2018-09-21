@@ -1,4 +1,4 @@
-package com.coco_sh.shmstore.dialog
+package com.coco_sh.shmstore.widget.dialog
 
 import android.Manifest
 import android.app.Dialog

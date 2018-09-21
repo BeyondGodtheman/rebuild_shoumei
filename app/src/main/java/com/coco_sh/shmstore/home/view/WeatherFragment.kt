@@ -19,7 +19,7 @@ class WeatherFragment : BaseFragment(), IWeatherView {
     override fun showLoading() {
     }
 
-    override fun hidenLoading() {
+    override fun hideLoading() {
     }
 
     override fun setLayout(): Int = R.layout.fragment_weather

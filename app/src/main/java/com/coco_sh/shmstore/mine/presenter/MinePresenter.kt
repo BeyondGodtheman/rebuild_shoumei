@@ -49,12 +49,12 @@ class MinePresenter(private var iMineView: IMineView?) : BasePresenter<IMineView
         iMineView?.showLoading()
         mineLoader?.loadCommonData(object :ApiManager.OnResult<BaseModel<CommonData>>(){
             override fun onSuccess(data: BaseModel<CommonData>) {
-                iMineView?.hidenLoading()
+                iMineView?.hideLoading()
                 iMineView?.onCommonData(data)
             }
 
             override fun onFailed(code: String, message: String) {
-                iMineView?.hidenLoading()
+                iMineView?.hideLoading()
             }
 
         })
@@ -62,7 +62,7 @@ class MinePresenter(private var iMineView: IMineView?) : BasePresenter<IMineView
 
 
 
-    override fun onDistroy() {
+    override fun onClose() {
         iMineView = null
         mineLoader = null
     }

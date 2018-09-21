@@ -11,7 +11,7 @@ import com.coco_sh.shmstore.base.BaseActivity
  * 权限工具类
  * Created by zhangye on 2018/4/16.
  */
-class PermissionUtil(private var activity: BaseActivity) {
+class PermissionUtil(private var activity: BaseActivity?) {
 
     private var messageMap = hashMapOf<String, String>()
     private var permissions = kotlin.arrayOf<String>()
@@ -30,10 +30,14 @@ class PermissionUtil(private var activity: BaseActivity) {
 
     fun checkPermission(array: Array<String>): Boolean {
         array.forEach {
-            if (ContextCompat.checkSelfPermission(activity, it) != PackageManager.PERMISSION_GRANTED) {
-                missPermission = it
-                return false
+            val permission = it
+            activity?.let {
+                if (ContextCompat.checkSelfPermission(it, permission) != PackageManager.PERMISSION_GRANTED) {
+                    missPermission = permission
+                    return false
+                }
             }
+
         }
         return true
     }
@@ -59,7 +63,7 @@ class PermissionUtil(private var activity: BaseActivity) {
                 Manifest.permission.CAMERA,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        return requestPermission(PermissionCode.CAMERA.type)
+        return requestPermission(IntentCode.CAMERA)
     }
 
 
@@ -71,7 +75,7 @@ class PermissionUtil(private var activity: BaseActivity) {
         permissions = arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        return requestPermission(PermissionCode.STORAGE.type)
+        return requestPermission(IntentCode.STORAGE)
     }
 
 
@@ -81,7 +85,7 @@ class PermissionUtil(private var activity: BaseActivity) {
     fun callPermission(): Boolean {
         permissions = arrayOf(
                 Manifest.permission.CALL_PHONE)
-        return requestPermission(PermissionCode.PHONE.type)
+        return requestPermission(IntentCode.PHONE)
     }
 
 
@@ -92,23 +96,29 @@ class PermissionUtil(private var activity: BaseActivity) {
         permissions = arrayOf(
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION)
-        return requestPermission(PermissionCode.LOCATION.type)
+        return requestPermission(IntentCode.LOCATION)
     }
-
 
 
     /**
      * 请求权限
      */
-    private fun requestPermission(code:Int): Boolean {
+    private fun requestPermission(code: Int): Boolean {
         if (!isPermission()) {
             return true
         }
         if (checkPermission(permissions)) {
             return true
         } else {
-            ActivityCompat.requestPermissions(activity, permissions, code)
+            activity?.let {
+                ActivityCompat.requestPermissions(it, permissions, code)
+            }
         }
         return false
+    }
+
+
+    fun onDestroy() {
+        activity = null
     }
 }

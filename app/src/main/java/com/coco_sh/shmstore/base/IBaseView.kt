@@ -9,7 +9,7 @@ interface IBaseView {
 
     fun showLoading()
 
-    fun hidenLoading()
+    fun hideLoading()
 
     fun showError(errorType: ErrorViewType) {}
 }

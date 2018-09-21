@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/h2"
         android:layout_marginTop="@dimen/h60"
-        android:background="@color/graye0"
+        android:background="@color/grayE0"
         android:contentDescription="@null" />
 
     <LinearLayout
@@ -55,14 +55,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/cancle"
+            android:text="@string/cancel"
             android:textSize="@dimen/w48" />
 
         <ImageView
             android:id="@id/ivLine"
             android:layout_width="@dimen/w2"
             android:layout_height="match_parent"
-            android:background="@color/graye0"
+            android:background="@color/grayE0"
             android:contentDescription="@null" />
 
         <TextView

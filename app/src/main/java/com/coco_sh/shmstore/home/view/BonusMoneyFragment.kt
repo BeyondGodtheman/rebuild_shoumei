@@ -35,6 +35,6 @@ class BonusMoneyFragment:BaseFragment(),IBonusMoneyView {
     }
 
 
-    override fun hidenLoading() {
+    override fun hideLoading() {
     }
 }
