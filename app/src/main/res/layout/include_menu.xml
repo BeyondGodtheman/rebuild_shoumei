@@ -28,7 +28,7 @@
             android:orientation="vertical"
             android:gravity="center_vertical">
 
-            <com.coco_sh.shmstore.widget.textView.IconTextView
+            <com.shoumei.xhn.widget.textView.IconTextView
                 android:id="@+id/iv_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical">
 
-            <com.coco_sh.shmstore.widget.textView.IconTextView
+            <com.shoumei.xhn.widget.textView.IconTextView
                 android:id="@+id/iv_income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_shoumei_home" />
 
-            <com.coco_sh.shmstore.widget.textView.IconTextView
+            <com.shoumei.xhn.widget.textView.IconTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -136,7 +136,7 @@
             android:orientation="vertical"
             android:gravity="center_vertical">
 
-            <com.coco_sh.shmstore.widget.textView.IconTextView
+            <com.shoumei.xhn.widget.textView.IconTextView
                 android:id="@+id/iv_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical">
 
-            <com.coco_sh.shmstore.widget.textView.IconTextView
+            <com.shoumei.xhn.widget.textView.IconTextView
                 android:id="@+id/iv_mine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

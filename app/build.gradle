@@ -9,7 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.coco_sh.shmstore"
+        applicationId "com.shoumei.xhn"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1

@@ -26,7 +26,7 @@
         <!--android:layout_alignBaseline="@+id/ICONTextView"
         android:layout_alignBottom="@+id/ICONTextView"-->
 
-        <com.coco_sh.shmstore.widget.edittext.SmEditText
+        <com.shoumei.xhn.widget.edittext.SmEditText
             android:id="@id/edtPhone"
             style="@style/PhoneEidttextStyle"
             android:layout_height="@dimen/h100"
@@ -38,7 +38,7 @@
             android:paddingBottom="@dimen/h40"
             android:paddingLeft="@dimen/w100" />
 
-        <com.coco_sh.shmstore.widget.textView.IconTextView
+        <com.shoumei.xhn.widget.textView.IconTextView
             android:id="@+id/ICONTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:textColor="@color/iconColor"
             android:textSize="@dimen/w60" />
 
-        <com.coco_sh.shmstore.widget.textView.IconTextView
+        <com.shoumei.xhn.widget.textView.IconTextView
             android:id="@+id/itvDown"
             android:layout_width="@dimen/w100"
             android:layout_height="@dimen/h100"
@@ -61,7 +61,7 @@
             android:visibility="invisible" />
 
 
-        <com.coco_sh.shmstore.widget.edittext.SmEditText
+        <com.shoumei.xhn.widget.edittext.SmEditText
             android:id="@+id/edtPassword"
             style="@style/PassEdittextStyle"
             android:layout_height="@dimen/h100"
@@ -74,7 +74,7 @@
             android:paddingLeft="@dimen/w100"
             android:paddingRight="@dimen/w10" />
 
-        <com.coco_sh.shmstore.widget.textView.IconTextView
+        <com.shoumei.xhn.widget.textView.IconTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/edtPhone"
@@ -166,7 +166,7 @@
                 android:layout_marginLeft="@dimen/w100"
                 android:layout_marginRight="@dimen/w100">
 
-                <com.coco_sh.shmstore.widget.textView.IconTextView
+                <com.shoumei.xhn.widget.textView.IconTextView
                     android:id="@+id/itvWeChat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
                     android:textColor="@color/red"
                     android:textSize="@dimen/w100" />
 
-                <com.coco_sh.shmstore.widget.textView.IconTextView
+                <com.shoumei.xhn.widget.textView.IconTextView
                     android:id="@+id/itvQQ"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                     android:textColor="@color/red"
                     android:textSize="@dimen/w100" />
 
-                <com.coco_sh.shmstore.widget.textView.IconTextView
+                <com.shoumei.xhn.widget.textView.IconTextView
                     android:id="@+id/itvSina"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

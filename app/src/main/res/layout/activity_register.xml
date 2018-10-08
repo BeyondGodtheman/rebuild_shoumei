@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/h3">
 
-        <com.coco_sh.shmstore.widget.edittext.SmEditText
+        <com.shoumei.xhn.widget.edittext.SmEditText
             android:id="@id/edtPhone"
             style="@style/EidttextStyle"
             android:hint="@string/phone"
@@ -24,14 +24,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/h3">
 
-        <com.coco_sh.shmstore.widget.edittext.SmEditText
+        <com.shoumei.xhn.widget.edittext.SmEditText
             android:id="@id/edtCode"
             style="@style/CodeEidttextStyle"
             android:hint="@string/inputCode"
             android:paddingLeft="@dimen/w36"
             android:paddingRight="@dimen/w36" />
 
-        <com.coco_sh.shmstore.widget.button.TimerButton
+        <com.shoumei.xhn.widget.button.TimerButton
             android:id="@id/btnCode"
             style="@style/CodeButtonStyle"
             android:layout_alignParentEnd="true"
@@ -43,7 +43,7 @@
 
     </RelativeLayout>
 
-    <com.coco_sh.shmstore.widget.edittext.SmEditText
+    <com.shoumei.xhn.widget.edittext.SmEditText
         android:id="@id/edtPassWord"
         style="@style/PassEdittextStyle"
         android:layout_marginTop="@dimen/h3"
@@ -51,7 +51,7 @@
         android:paddingLeft="@dimen/w36"
         android:paddingRight="@dimen/w36" />
 
-    <com.coco_sh.shmstore.widget.edittext.SmEditText
+    <com.shoumei.xhn.widget.edittext.SmEditText
         android:id="@id/editSurePassWord"
         style="@style/PassEdittextStyle"
         android:layout_marginTop="@dimen/h3"
@@ -73,7 +73,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/h40">
 
-        <com.coco_sh.shmstore.widget.textView.CheckedIconTextView
+        <com.shoumei.xhn.widget.textView.CheckedIconTextView
             android:id="@id/tvChecked"
             android:layout_width="@dimen/w105"
             android:layout_height="match_parent"

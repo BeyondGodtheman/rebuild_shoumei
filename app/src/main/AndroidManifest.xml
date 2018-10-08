@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.coco_sh.shmstore">
+    package="com.shoumei.xhn">
 
     <!-- 用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -36,7 +36,7 @@
 
 
     <application
-        android:name=".SmApplication"
+        android:name="com.shoumei.xhn.SmApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -48,7 +48,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.coco_sh.shmstore.provider"
+            android:authorities="com.shoumei.xhn.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -65,7 +65,7 @@
 
 
         <!--开屏页面-->
-        <activity android:name=".splash.view.SplashActivity">
+        <activity android:name="com.shoumei.xhn.splash.view.SplashActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,34 +74,34 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".home.view.MainActivity" />
+        <activity android:name="com.shoumei.xhn.home.view.MainActivity" />
 
 
         <!--注册页面-->
-        <activity android:name=".regist.view.RegisterActivity" />
+        <activity android:name="com.shoumei.xhn.regist.view.RegisterActivity" />
 
         <!--登录页面-->
         <activity
-            android:name=".login.view.LoginActivity"
+            android:name="com.shoumei.xhn.login.view.LoginActivity"
             android:launchMode="singleTop" />
 
         <!--忘记密码-->
         <activity
-            android:name=".forget.view.ForgetPassActivity"
+            android:name="com.shoumei.xhn.forget.view.ForgetPassActivity"
             android:launchMode="singleTop" />
 
         <activity
-            android:name=".archives.view.ArchivesActivity"
+            android:name="com.shoumei.xhn.archives.view.ArchivesActivity"
             android:launchMode="singleTop" />
 
         <!--设置页面-->
         <activity
-            android:name=".setting.view.SettingActivity"
+            android:name="com.shoumei.xhn.setting.view.SettingActivity"
             android:launchMode="singleTop" />
 
         <!--关于首媒-->
         <activity
-            android:name=".setting.view.AboutActivity"
+            android:name="com.shoumei.xhn.setting.view.AboutActivity"
             android:launchMode="singleTop" />
     </application>
 

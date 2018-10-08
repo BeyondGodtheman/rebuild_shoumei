@@ -4,7 +4,7 @@
     android:layout_height="@dimen/h148"
     android:background="@color/grayFA">
 
-    <com.coco_sh.shmstore.widget.textView.IconTextView
+    <com.shoumei.xhn.widget.textView.IconTextView
         android:id="@id/tvIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:layout_marginStart="@dimen/w32"
         android:layout_toEndOf="@id/tvIcon" />
 
-    <com.coco_sh.shmstore.widget.textView.IconTextView
+    <com.shoumei.xhn.widget.textView.IconTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

@@ -106,7 +106,7 @@
         android:layout_height="@dimen/h2"
         android:background="@color/grayE0" />
 
-    <com.coco_sh.shmstore.home.widget.HomeBottomView
+    <com.shoumei.xhn.home.widget.HomeBottomView
         android:id="@+id/homeBottomView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/h360" />

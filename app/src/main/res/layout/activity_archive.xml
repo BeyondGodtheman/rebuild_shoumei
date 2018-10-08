@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true">
 
-                <com.coco_sh.shmstore.widget.progress.ArcProgressBar
+                <com.shoumei.xhn.widget.progress.ArcProgressBar
                     android:id="@+id/progressBar_big"
                     android:layout_width="@dimen/w260"
                     android:layout_height="@dimen/w260"
@@ -35,7 +35,7 @@
                     app:arc_text_color = "@color/gray6"
                     app:arc_unfinished_color = "@color/grayE0"
                     app:arc_finished_color = "@color/red"
-                    app:arc_bottom_text="完善度"/>
+                    app:arc_bottom_text="@string/perfection"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -43,14 +43,14 @@
                     android:layout_centerInParent="true"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
 
                     <TextView
                         android:id="@+id/tvProgress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0%"
+                        android:text="@string/defaultProgress"
                         android:textColor="@color/black"
                         android:textSize="@dimen/w60" />
 
@@ -58,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="完善度"
+                        android:text=""
                         android:textColor="@color/gray6"
                         android:textSize="@dimen/w40" />
                 </LinearLayout>
@@ -89,7 +89,7 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <com.coco_sh.shmstore.widget.itemview.ItemShowView
+        <com.shoumei.xhn.widget.itemview.ItemShowView
             android:id="@+id/isvHead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,30 +108,30 @@
                 android:scaleType="fitXY"
                 app:riv_oval="true"
                 android:src="@drawable/defalut_updata_image" />
-        </com.coco_sh.shmstore.widget.itemview.ItemShowView>
+        </com.shoumei.xhn.widget.itemview.ItemShowView>
 
-        <com.coco_sh.shmstore.widget.itemview.ItemShowView
+        <com.shoumei.xhn.widget.itemview.ItemShowView
             android:id="@+id/isvNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:nameText="昵称"/>
 
 
-        <com.coco_sh.shmstore.widget.itemview.ItemShowView
+        <com.shoumei.xhn.widget.itemview.ItemShowView
             android:id="@+id/isvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:nameText="真实姓名"/>
 
 
-        <com.coco_sh.shmstore.widget.itemview.ItemShowView
+        <com.shoumei.xhn.widget.itemview.ItemShowView
             android:id="@+id/isvBirthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:nameText="生日"/>
 
 
-        <com.coco_sh.shmstore.widget.itemview.ItemShowView
+        <com.shoumei.xhn.widget.itemview.ItemShowView
             android:id="@+id/isvSex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,28 +139,28 @@
 
 
 
-        <com.coco_sh.shmstore.widget.itemview.ItemShowView
+        <com.shoumei.xhn.widget.itemview.ItemShowView
             android:id="@+id/isvAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:nameText="地区"/>
 
 
-        <com.coco_sh.shmstore.widget.itemview.ItemShowView
+        <com.shoumei.xhn.widget.itemview.ItemShowView
             android:id="@+id/isvCompany"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:nameText="公司"/>
 
 
-        <com.coco_sh.shmstore.widget.itemview.ItemShowView
+        <com.shoumei.xhn.widget.itemview.ItemShowView
             android:id="@+id/isvWork"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:nameText="所属行业"/>
 
 
-        <com.coco_sh.shmstore.widget.itemview.ItemShowView
+        <com.shoumei.xhn.widget.itemview.ItemShowView
             android:id="@+id/isvInteresting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -175,6 +175,6 @@
                 android:text="我们将根据您的喜好为您推荐红包"
                 android:textColor="@color/red"
                 android:textSize="@dimen/h40" />
-        </com.coco_sh.shmstore.widget.itemview.ItemShowView>
+        </com.shoumei.xhn.widget.itemview.ItemShowView>
     </LinearLayout>
 </ScrollView>

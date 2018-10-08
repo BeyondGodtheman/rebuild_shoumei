@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/Title">
 
-    <com.coco_sh.shmstore.widget.textView.IconTextView
+    <com.shoumei.xhn.widget.textView.IconTextView
         android:id="@id/tvLeft"
         style="@style/Title.Icon"
         android:layout_marginLeft="@dimen/w25"
@@ -23,7 +23,7 @@
         android:gravity="center"
         android:text="@string/placeholder" />
 
-    <com.coco_sh.shmstore.widget.textView.IconTextView
+    <com.shoumei.xhn.widget.textView.IconTextView
         android:id="@id/tvRight"
         style="@style/Title.Icon"
         android:layout_alignParentEnd="true"

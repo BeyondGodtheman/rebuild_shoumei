@@ -13,7 +13,7 @@
         tools:ignore="RelativeOverlap"
         tools:text="13111111111" />
 
-    <com.coco_sh.shmstore.widget.textView.IconTextView
+    <com.shoumei.xhn.widget.textView.IconTextView
         android:id="@id/tvDelete"
         android:layout_width="@dimen/w100"
         android:layout_height="@dimen/h60"
