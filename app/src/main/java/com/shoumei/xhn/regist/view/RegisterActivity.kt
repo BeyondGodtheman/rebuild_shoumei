@@ -33,7 +33,7 @@ class RegisterActivity : BaseActivity(), IRegisterView {
     }
 
     override fun hideLoading() {
-        loadingUtil.hidenLoading()
+        loadingUtil.hideLoading()
     }
 
 

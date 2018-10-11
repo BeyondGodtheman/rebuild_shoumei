@@ -13,33 +13,74 @@ import com.shoumei.xhn.base.BaseActivity
  */
 class PermissionUtil(private var activity: BaseActivity?) {
 
+    private val firstPermissions = "firstPermissions" //是否是首次授权
+
     private var messageMap = hashMapOf<String, String>()
     private var permissions = kotlin.arrayOf<String>()
 
     init {
-        messageMap[Manifest.permission.CAMERA] = "相机权限"
-        messageMap[Manifest.permission.READ_EXTERNAL_STORAGE] = "存储卡读取权限"
-        messageMap[Manifest.permission.WRITE_EXTERNAL_STORAGE] = "存储卡写入权限"
+        messageMap[Manifest.permission.CAMERA] = "相机"
+        messageMap[Manifest.permission.WRITE_EXTERNAL_STORAGE] = "文件存储"
+        messageMap[Manifest.permission.CALL_PHONE] = "电话"
+        messageMap[Manifest.permission.ACCESS_COARSE_LOCATION] = "位置"
     }
 
-    private var missPermission = ""
+    private var missPermissions = ArrayList<String>()
+
+    private var isNotReminding = false  //用户是否勾选不在提醒选项
 
     /**
-     *  检查所有权限是否拥有
+     *  检查指定权限是否拥有
      */
 
     fun checkPermission(array: Array<String>): Boolean {
-        array.forEach {
-            val permission = it
-            activity?.let {
-                if (ContextCompat.checkSelfPermission(it, permission) != PackageManager.PERMISSION_GRANTED) {
-                    missPermission = permission
-                    return false
+
+        var isPermission = true
+
+        missPermissions.clear()
+        array.forEach { permission ->
+            activity?.let { activity ->
+                if (ContextCompat.checkSelfPermission(activity, permission) == PackageManager.PERMISSION_DENIED) {
+                    messageMap[permission]?.let {
+                        missPermissions.add(it)
+                    }
+                    isPermission = false
+
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+                        isNotReminding = true
+                    }
                 }
             }
-
         }
-        return true
+        return isPermission
+    }
+
+    /**
+     * 判断用户是否勾选了不在提醒
+     */
+    fun isNotReminding():Boolean {
+        //当用户勾选不在提示
+        if (isNotReminding){
+            //判断如果是第一次安装，将勾选不在提示取消
+            if (SharedUtil.getBoolean(firstPermissions,true)){
+                isNotReminding = false
+                SharedUtil.setBoolean(firstPermissions,false)
+            }
+        }
+        return isNotReminding
+    }
+
+
+    /**
+     * 获取拒绝的权限名字
+     */
+    fun getMissPerName(): String {
+        val nameSb = StringBuilder()
+        missPermissions.forEach {
+            nameSb.append(it).append("、")
+        }
+        nameSb.deleteCharAt(nameSb.length - 1)
+        return nameSb.toString()
     }
 
 
@@ -60,9 +101,7 @@ class PermissionUtil(private var activity: BaseActivity?) {
      */
     fun cameraPermission(): Boolean {
         permissions = arrayOf(
-                Manifest.permission.CAMERA,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                Manifest.permission.CAMERA)
         return requestPermission(IntentCode.CAMERA)
     }
 
@@ -73,7 +112,6 @@ class PermissionUtil(private var activity: BaseActivity?) {
      */
     fun storagePermission(): Boolean {
         permissions = arrayOf(
-                Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
         return requestPermission(IntentCode.STORAGE)
     }
@@ -94,14 +132,24 @@ class PermissionUtil(private var activity: BaseActivity?) {
      */
     fun locationPermission(): Boolean {
         permissions = arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+                Manifest.permission.ACCESS_COARSE_LOCATION)
         return requestPermission(IntentCode.LOCATION)
+    }
+
+    /**
+     * 获取所有权限
+     */
+    fun allPermission(): Boolean {
+        permissions = arrayOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.ACCESS_COARSE_LOCATION)
+        return requestPermission(IntentCode.ALL)
     }
 
 
     /**
-     * 请求权限
+     * 开始请求权限
      */
     private fun requestPermission(code: Int): Boolean {
         if (!isPermission()) {

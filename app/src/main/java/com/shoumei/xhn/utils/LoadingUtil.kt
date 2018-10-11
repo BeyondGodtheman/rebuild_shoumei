@@ -19,7 +19,7 @@ class LoadingUtil(private var bodyView: ViewGroup) {
         bodyView.addView(loadingView)
     }
 
-    fun hidenLoading() {
+    fun hideLoading() {
         bodyView.removeView(loadingView)
     }
 

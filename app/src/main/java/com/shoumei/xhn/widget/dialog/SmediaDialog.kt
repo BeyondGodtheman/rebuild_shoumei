@@ -19,9 +19,9 @@ import kotlinx.android.synthetic.main.dialog_default.*
  * Created by zhangye on 2018/1/27.
  */
 class SmediaDialog(context: Context) : Dialog(context), View.OnClickListener {
-    var OnClickListener: View.OnClickListener? = null
+    var onClickListener1: View.OnClickListener? = null
     var cancelOnClickListener: View.OnClickListener? = null
-    private var cancleIsFinish = false
+    private var cancelIsFinish = false
 
     init {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -39,7 +39,7 @@ class SmediaDialog(context: Context) : Dialog(context), View.OnClickListener {
                 dismiss()
             }
             tvSure.id -> {
-                OnClickListener?.onClick(v)
+                onClickListener1?.onClick(v)
                 dismiss()
             }
         }
@@ -55,7 +55,7 @@ class SmediaDialog(context: Context) : Dialog(context), View.OnClickListener {
     }
 
     fun setDescColor(color: Int) {
-        tvDesc.setTextColor(color)
+        tvDesc.setTextColor(ContextCompat.getColor(context,color))
     }
 
 
@@ -79,7 +79,7 @@ class SmediaDialog(context: Context) : Dialog(context), View.OnClickListener {
     fun showSmsMotifyPassword(password: String, OnClickListener: View.OnClickListener) {
         setTitle(context.resources.getString(R.string.surePass))
         setDesc(password)
-        this.OnClickListener = OnClickListener
+        this.onClickListener1 = OnClickListener
         show()
     }
 
@@ -89,7 +89,7 @@ class SmediaDialog(context: Context) : Dialog(context), View.OnClickListener {
     fun showCallPhone(OnClickListener: View.OnClickListener) {
         setTitle("首媒客服：${Constant.SMEDIA_PHONE}")
         setPositiveText("拨打")
-        this.OnClickListener = OnClickListener
+        this.onClickListener1 = OnClickListener
         show()
     }
 
@@ -105,7 +105,7 @@ class SmediaDialog(context: Context) : Dialog(context), View.OnClickListener {
         }
 //        setTitle("前往登录")
 //        setPositiveText("去登录")
-//        OnClickListener = View.OnClickListener {
+//        onClickListener1 = View.onClickListener1 {
 //            val intent = Intent(baseActivity, LoginActivity::class.java)
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                baseActivity.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(baseActivity).toBundle())
@@ -120,7 +120,7 @@ class SmediaDialog(context: Context) : Dialog(context), View.OnClickListener {
 
     //取消按钮销毁页面
     fun cancleFinish() {
-        cancleIsFinish = true
+        cancelIsFinish = true
     }
 
 
@@ -129,7 +129,7 @@ class SmediaDialog(context: Context) : Dialog(context), View.OnClickListener {
         setTitle("请完善档案")
         setPositiveText("现在前往")
         setCancelText("稍后")
-//        OnClickListener = View.OnClickListener {
+//        onClickListener1 = View.onClickListener1 {
 //            val intent = Intent(context, ArchiveActivity::class.java)
 //            context.startActivity(intent)
 //        }

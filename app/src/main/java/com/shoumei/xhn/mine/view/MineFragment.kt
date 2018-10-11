@@ -40,7 +40,7 @@ class MineFragment : BaseFragment(), IMineView {
     }
 
     override fun hideLoading() {
-        loadingUtil?.hidenLoading()
+        loadingUtil?.hideLoading()
     }
 
 

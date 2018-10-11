@@ -172,14 +172,14 @@ class HomeBottomView : RelativeLayout {
 //    private fun initPhotoFragment(){
 //        photoFragment1 = PhotoFragment()
 //        photoFragment1?.res = R.drawable.bg_default_id_front
-//        photoFragment1?.onClickListener = OnClickListener{
+//        photoFragment1?.onClickListener = onClickListener1{
 //            val intent = Intent(context, BonusListActivity::class.java)
 //            intent.putExtra("title", "消费扶贫")
 //            context.startActivity(intent)
 //        }
 //        photoFragment2 = PhotoFragment()
 //        photoFragment2?.res = R.drawable.bg_default_id_back
-//        photoFragment2?.onClickListener = OnClickListener{
+//        photoFragment2?.onClickListener = onClickListener1{
 //            val intent = Intent(context, BonusListActivity::class.java)
 //            intent.putExtra("title", "媒体扶贫")
 //

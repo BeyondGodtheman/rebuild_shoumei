@@ -38,7 +38,7 @@ class LoginActivity : BaseActivity(), ILoginView {
     }
 
     override fun hideLoading() {
-        loadingUtil.hidenLoading()
+        loadingUtil.hideLoading()
     }
 
 

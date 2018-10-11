@@ -50,7 +50,7 @@ class HistoryPhonePopupWindow(context: Context, var data: ArrayList<LoginHistory
     fun showDeleteDialog(context: Context, position: Int) {
         val dialog = SmediaDialog(context)
         dialog.setTitle("是否清除该号码")
-        dialog.OnClickListener = View.OnClickListener {
+        dialog.onClickListener1 = View.OnClickListener {
             val history = data[position]
             SmApplication.getApp().dataStorage.delete(history)
             data.remove(history)

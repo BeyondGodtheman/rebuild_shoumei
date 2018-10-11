@@ -82,7 +82,7 @@ class SettingActivity : BaseActivity(), ISettingView {
         if (paypass == 0) {
             val dialog = SmediaDialog(this)
             dialog.setTitle("您未设置过支付密码，设置前将验证您的身份，即将发送验证码到" + UserManager.getCryptogramPhone())
-            dialog.OnClickListener = View.OnClickListener {
+            dialog.onClickListener1 = View.OnClickListener {
 
             }
             dialog.show()
@@ -96,7 +96,7 @@ class SettingActivity : BaseActivity(), ISettingView {
     private fun clear() {
         val dialog = SmediaDialog(this)
         dialog.setTitle("您确定要清除缓存吗?")
-        dialog.OnClickListener = View.OnClickListener {
+        dialog.onClickListener1 = View.OnClickListener {
             settingPresenter?.clearCache() //清楚缓存
         }
         dialog.show()
@@ -108,7 +108,7 @@ class SettingActivity : BaseActivity(), ISettingView {
     private fun logout() {
         val dialog = SmediaDialog(this)
         dialog.setTitle("是否要退出当前账号")
-        dialog.OnClickListener = View.OnClickListener {
+        dialog.onClickListener1 = View.OnClickListener {
             UserManager.setEmptyUser()
             finish()
         }

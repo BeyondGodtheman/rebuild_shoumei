@@ -23,10 +23,10 @@ class ItemShowView : RelativeLayout {
     fun initView(attrs: AttributeSet?) {
         LayoutInflater.from(context).inflate(R.layout.layout_item_show, this, true)
         attrs?.let {
-            val typedarray = context.obtainStyledAttributes(it, R.styleable.ItemShowView)
-            val name = typedarray.getString(R.styleable.ItemShowView_nameText)
-            val value = typedarray.getString(R.styleable.ItemShowView_valueText)
-            typedarray.recycle()
+            val typedArray = context.obtainStyledAttributes(it, R.styleable.ItemShowView)
+            val name = typedArray.getString(R.styleable.ItemShowView_nameText)
+            val value = typedArray.getString(R.styleable.ItemShowView_valueText)
+            typedArray.recycle()
             if (name != null) {
                 tvName.text = name
             }

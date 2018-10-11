@@ -75,9 +75,9 @@ class HomeFragment : BaseFragment(), IHomeView {
 //            showTitle(it)
 //        }
 //
-//        getLayoutView().layoutOne.setOnClickListener(this)
-//        getLayoutView().layoutTwo.setOnClickListener(this)
-//        getLayoutView().layoutThree.setOnClickListener(this)
+//        getLayoutView().layoutOne.setOnClickListener1(this)
+//        getLayoutView().layoutTwo.setOnClickListener1(this)
+//        getLayoutView().layoutThree.setOnClickListener1(this)
 //        getLayoutView().homeBottomView.setFragmentManager(childFragmentManager)
 //        loadBanner()
 //    }
@@ -122,7 +122,7 @@ class HomeFragment : BaseFragment(), IHomeView {
 ////            }
 ////            mDialog.show()
 ////
-////            mDialog.OnClickListener = View.OnClickListener {
+////            mDialog.onClickListener1 = View.onClickListener1 {
 ////                if (info.authStatus == "H") {
 ////                    //新媒人
 ////                    PartnerSplashActivity.start(activity)

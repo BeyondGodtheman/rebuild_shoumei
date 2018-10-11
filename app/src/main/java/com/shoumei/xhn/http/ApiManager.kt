@@ -6,6 +6,7 @@ import com.shoumei.xhn.utils.LogUtil
 import com.shoumei.xhn.utils.NetworkUtils
 import com.shoumei.xhn.utils.ToastUtil
 import com.google.gson.Gson
+import com.shoumei.xhn.base.BaseModel
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -207,7 +208,7 @@ object ApiManager {
         if (onResult.tag == STRING) {
             onResult.onSuccess(json as T)
         } else {
-            if (onResult.typeToken.toString().contains("com.coco_sh.shmstore.base.BaseModel")) {
+            if (onResult.typeToken.toString().contains(BaseModel::class.java.name)) {
                 try {
                     val jsonObj = JSONObject(json)
                     val status = jsonObj.opt("status").toString()
@@ -217,7 +218,6 @@ object ApiManager {
                     } else {
                         val message = jsonObj.opt("message").toString()
                         onResult.onFailed(status, message)
-                        ToastUtil.show(message)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

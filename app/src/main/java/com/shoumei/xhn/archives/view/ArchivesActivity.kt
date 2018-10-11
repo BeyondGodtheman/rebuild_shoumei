@@ -16,7 +16,7 @@ import java.io.File
 
 /**
  * 档案页面
- * Created by zhangye on 2018/9/20.
+ * Created by ZhangYe on 2018/9/20.
  */
 class ArchivesActivity : BaseActivity(), IArchivesView, PhotoDialog.OnItemClickListener {
 
@@ -56,7 +56,7 @@ class ArchivesActivity : BaseActivity(), IArchivesView, PhotoDialog.OnItemClickL
     }
 
     override fun hideLoading() {
-        loadingUtil.hidenLoading()
+        loadingUtil.hideLoading()
     }
 
     //展示档案数据
