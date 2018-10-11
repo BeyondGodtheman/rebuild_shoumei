@@ -5,7 +5,6 @@ import android.view.View
 import com.shoumei.xhn.R
 import com.shoumei.xhn.archives.presenter.ArchivesPresenter
 import com.shoumei.xhn.base.BaseActivity
-import com.shoumei.xhn.base.ErrorViewType
 import com.shoumei.xhn.mine.model.Profile
 import com.shoumei.xhn.utils.CameraPhotoUtils
 import com.shoumei.xhn.utils.GlideApp
