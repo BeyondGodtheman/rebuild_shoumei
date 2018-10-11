@@ -12,15 +12,25 @@ import android.view.inputmethod.InputMethodManager
 import com.shoumei.xhn.R
 import com.shoumei.xhn.title.TitleManager
 import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.layout_error.view.*
 
 
 @SuppressLint("Registered")
 
 /**
  *
- * Created by zhangye on 2018/8/2.
+ * Created by 张野 on 2018/8/2.
  */
-abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
+abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListener {
+
+    val loadingView: View by lazy {
+        View.inflate(this, R.layout.layout_loading, null)
+    }
+
+    val errorView: View by lazy {
+        View.inflate(this, R.layout.layout_error, null)
+    }
+
     lateinit var titleManager: TitleManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +39,14 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_base)
         val bodyView = LayoutInflater.from(this).inflate(setLayout(), null, false)
         frameBody.addView(bodyView)
+
+        loadingView.setOnClickListener {  }
+        errorView.setOnClickListener {  }
+        errorView.btnNext.setOnClickListener {
+            hideError()
+            loadData()
+        }
+
         initView()
         loadData()
     }
@@ -43,6 +61,7 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
     abstract fun loadData()
 
     abstract fun close()
+
 
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -65,6 +84,25 @@ abstract class BaseActivity : AppCompatActivity(), View.OnClickListener {
     fun hideKeyboard() {
         val im = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         im.hideSoftInputFromWindow(this.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+
+    override fun showLoading() {
+        loadingView.setOnClickListener {  }
+        frameBody.addView(loadingView)
+    }
+
+    override fun hideLoading() {
+        frameBody.removeView(loadingView)
+    }
+
+
+    override fun showError(errorType: ErrorViewType) {
+
+        frameBody.addView(errorView)
+    }
+
+    override fun hideError() {
+        frameBody.removeView(errorView)
     }
 
 

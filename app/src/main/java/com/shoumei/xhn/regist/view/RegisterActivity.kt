@@ -10,7 +10,6 @@ import com.shoumei.xhn.base.BaseModel
 import com.shoumei.xhn.regist.presenter.RegisterPresenter
 import com.shoumei.xhn.sms.model.SmSMS
 import com.shoumei.xhn.sms.type.SmsType
-import com.shoumei.xhn.utils.LoadingUtil
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -22,18 +21,6 @@ class RegisterActivity : BaseActivity(), IRegisterView {
 
     private val registerPresenter: RegisterPresenter by lazy {
         RegisterPresenter(this)
-    }
-
-    private val loadingUtil: LoadingUtil by lazy {
-        LoadingUtil(frameBody)
-    }
-
-    override fun showLoading() {
-        loadingUtil.showLoading()
-    }
-
-    override fun hideLoading() {
-        loadingUtil.hideLoading()
     }
 
 

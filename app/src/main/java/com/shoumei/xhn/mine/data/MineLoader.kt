@@ -16,4 +16,7 @@ class MineLoader(private var composite: CompositeDisposable) {
     fun loadCommonData(onResult: ApiManager.OnResult<BaseModel<CommonData>>) {
         ApiManager.get(composite, null, Constant.COMMON_DATA, onResult)
     }
+
+
+
 }

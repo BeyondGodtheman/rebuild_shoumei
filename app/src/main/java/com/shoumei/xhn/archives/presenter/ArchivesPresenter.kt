@@ -5,6 +5,7 @@ import com.shoumei.xhn.archives.data.ArchivesType
 import com.shoumei.xhn.archives.view.IArchivesView
 import com.shoumei.xhn.base.BaseModel
 import com.shoumei.xhn.base.BasePresenter
+import com.shoumei.xhn.base.ErrorViewType
 import com.shoumei.xhn.base.IBaseView
 import com.shoumei.xhn.http.ApiManager
 import com.shoumei.xhn.login.manager.UserManager
@@ -32,14 +33,8 @@ class ArchivesPresenter(private var iArchivesView: IArchivesView?) : BasePresent
     }
 
     //加载档案信息
-    fun loadArchives(isLoadCache: Boolean) {
+    fun loadArchives() {
         iArchivesView?.showLoading()
-        if (isLoadCache) {
-            //加载缓存
-            UserManager.getProfile()?.let {
-                iArchivesView?.showArchiveData(it)
-            }
-        }
         archivesLoader?.loadArchives(object : ApiManager.OnResult<BaseModel<Profile>>() {
             override fun onSuccess(data: BaseModel<Profile>) {
                 iArchivesView?.hideLoading()
@@ -50,8 +45,8 @@ class ArchivesPresenter(private var iArchivesView: IArchivesView?) : BasePresent
             }
 
             override fun onFailed(code: String, message: String) {
-                ToastUtil.show(message)
                 iArchivesView?.hideLoading()
+                iArchivesView?.showError(ErrorViewType.NO_NETWORK)
             }
         })
     }
@@ -62,7 +57,7 @@ class ArchivesPresenter(private var iArchivesView: IArchivesView?) : BasePresent
         archivesLoader?.modifyArchives(type, value, object : ApiManager.OnResult<BaseModel<String>>() {
             override fun onSuccess(data: BaseModel<String>) {
                 iArchivesView?.hideLoading()
-                loadArchives(false)
+                loadArchives()
             }
 
             override fun onFailed(code: String, message: String) {

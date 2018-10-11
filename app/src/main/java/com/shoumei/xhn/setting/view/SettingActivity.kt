@@ -9,7 +9,6 @@ import com.shoumei.xhn.login.manager.UserManager
 import com.shoumei.xhn.setting.presenter.SettingPresenter
 import com.shoumei.xhn.title.TitleManager
 import com.shoumei.xhn.utils.GlideApp
-import com.shoumei.xhn.utils.LoadingUtil
 import com.shoumei.xhn.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -21,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_setting.*
 class SettingActivity : BaseActivity(), ISettingView {
 
     private var settingPresenter: SettingPresenter? = null
-    private var loadingUtil: LoadingUtil? = null
 
     private var paypass = 0 //是否设置过支付密码
 
@@ -29,7 +27,6 @@ class SettingActivity : BaseActivity(), ISettingView {
 
     override fun initView() {
         frameTitle.addView(TitleManager(this).defaultTitle("设置"))
-        loadingUtil = LoadingUtil(frameBody)
         settingPresenter = SettingPresenter(this)
         settingPresenter?.onCreate()
         settingPresenter?.getCacheSize() //获取缓存大小
@@ -65,7 +62,6 @@ class SettingActivity : BaseActivity(), ISettingView {
     }
 
     override fun close() {
-        loadingUtil = null
     }
 
     override fun onClick(view: View) {

@@ -14,7 +14,6 @@ import com.shoumei.xhn.login.model.Login
 import com.shoumei.xhn.login.model.LoginHistory
 import com.shoumei.xhn.login.presenter.LoginPresenter
 import com.shoumei.xhn.regist.view.RegisterActivity
-import com.shoumei.xhn.utils.LoadingUtil
 import com.shoumei.xhn.widget.popupwindow.HistoryPhonePopupWindow
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.activity_login.*
@@ -29,17 +28,6 @@ import kotlinx.coroutines.experimental.launch
 class LoginActivity : BaseActivity(), ILoginView {
     private var isShow = false
     private var loginPresenter = LoginPresenter(this)
-    private val loadingUtil: LoadingUtil by lazy {
-        LoadingUtil(frameBody)
-    }
-
-    override fun showLoading() {
-        loadingUtil.showLoading()
-    }
-
-    override fun hideLoading() {
-        loadingUtil.hideLoading()
-    }
 
 
     override fun setLayout(): Int = R.layout.activity_login

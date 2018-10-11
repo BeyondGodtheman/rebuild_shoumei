@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.shoumei.xhn.R
+import kotlinx.android.synthetic.main.fragment_base.*
 import kotlinx.android.synthetic.main.fragment_base.view.*
 
 /**
  *
  * Created by zhangye on 2018/8/2.
  */
-abstract class BaseFragment : Fragment(), View.OnClickListener {
+abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     private var savedInstanceState: Bundle? = null
     private var mView: View? = null
 
@@ -60,6 +61,25 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
     abstract fun update()
 
     abstract fun loadData()
+
+
+    override fun showLoading() {
+        iframeBody.addView(getBaseActivity().loadingView)
+    }
+
+    override fun hideLoading() {
+        iframeBody.removeView(getBaseActivity().loadingView)
+    }
+
+
+    override fun showError(errorType: ErrorViewType) {
+        iframeBody.addView(getBaseActivity().errorView)
+    }
+
+    override fun hideError() {
+        iframeBody.removeView(getBaseActivity().errorView)
+    }
+
 
     abstract fun close()
 }

@@ -7,12 +7,6 @@ import com.shoumei.xhn.base.IBaseView
  * Created by zhangye on 2018/9/18.
  */
 interface ISettingView : IBaseView {
-    override fun showLoading() {
-    }
-
-    override fun hideLoading() {
-    }
-
     //显示缓存数量
     fun showCacheSize(size: String)
 

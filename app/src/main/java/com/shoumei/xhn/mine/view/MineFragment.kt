@@ -19,7 +19,6 @@ import com.shoumei.xhn.mine.model.MineNavEntity
 import com.shoumei.xhn.mine.presenter.MinePresenter
 import com.shoumei.xhn.title.TitleManager
 import com.shoumei.xhn.utils.GlideApp
-import com.shoumei.xhn.utils.LoadingUtil
 import com.shoumei.xhn.utils.RecycleViewDivider
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_base.view.*
@@ -29,27 +28,15 @@ import kotlinx.android.synthetic.main.layout_top_head.view.*
 
 class MineFragment : BaseFragment(), IMineView {
 
-    private var loadingUtil: LoadingUtil? = null
 
     private val minePresenter: MinePresenter by lazy {
         MinePresenter(this)
-    }
-
-    override fun showLoading() {
-        loadingUtil?.showLoading()
-    }
-
-    override fun hideLoading() {
-        loadingUtil?.hideLoading()
     }
 
 
     override fun setLayout(): Int = R.layout.fragment_mine
 
     override fun initView() {
-        getLayoutView()?.iframeBody?.let {
-            loadingUtil = LoadingUtil(it)
-        }
 
         immersionTitle() //title透明不占位
 
@@ -114,35 +101,33 @@ class MineFragment : BaseFragment(), IMineView {
         getLayoutView()?.recycleTopNav?.adapter = MineTopNavAdapter(list)
     }
 
-    override fun buttomNavData(list: ArrayList<MineNavEntity>) {
+    override fun bottomNavData(list: ArrayList<MineNavEntity>) {
         getLayoutView()?.recycleBottomNav?.adapter = MineBottomNavAdapter(list)
     }
 
 
     //通用信息回调
-    override fun onCommonData(data: BaseModel<CommonData>) {
-        data.message?.let {
-            UserManager.setCommon(it) //存储本地
-            getLayoutView()?.tvName?.text = it.nickname
+    override fun onCommonData(data: CommonData) {
+            UserManager.setCommon(data) //存储本地
+            getLayoutView()?.tvName?.text = data.nickname
             getLayoutView()?.tvNo?.apply {
-                text = (getString(R.string.no) + it.smno)
+                text = (getString(R.string.no) + data.smno)
                 visibility = View.VISIBLE
             }
             getLayoutView()?.ivHead?.let {
-                GlideApp.with(this).load(data.message?.avatar).placeholder(R.drawable.bg_update_head).into(it)
+                GlideApp.with(this).load(data.avatar).placeholder(R.drawable.bg_update_head).into(it)
             }
 
-            if (data.message?.avatar.isNullOrEmpty()) {
+            if (data.avatar.isNullOrEmpty()) {
                 getLayoutView()?.ivBg?.setImageResource(R.mipmap.bg_top_head)
             } else {
                 getLayoutView()?.ivBg?.let {
                     GlideApp.with(this)
-                            .load(data.message?.avatar)
+                            .load(data.avatar)
                             .apply(RequestOptions.bitmapTransform(BlurTransformation(2, 10)))
                             .into(it)
                 }
             }
-        }
     }
 
 

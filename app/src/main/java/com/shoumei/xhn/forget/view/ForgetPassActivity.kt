@@ -29,9 +29,6 @@ class ForgetPassActivity : BaseActivity(), IForgetPassView {
     private var permissionUtil: PermissionUtil? = null
     private var forgetPassPresenter = ForgetPassPresenter(this)
 
-    override fun showLoading() {
-
-    }
 
     override fun setLayout(): Int = R.layout.activity_forget_pass
 
@@ -76,9 +73,6 @@ class ForgetPassActivity : BaseActivity(), IForgetPassView {
         }
     }
 
-
-    override fun hideLoading() {
-    }
 
     override fun getEditPhone(): EditText = editPhone
 

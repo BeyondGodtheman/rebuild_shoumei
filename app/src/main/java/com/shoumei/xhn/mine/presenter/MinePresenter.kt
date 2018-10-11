@@ -5,6 +5,7 @@ import com.shoumei.xhn.SmApplication
 import com.shoumei.xhn.base.BaseModel
 import com.shoumei.xhn.base.BasePresenter
 import com.shoumei.xhn.http.ApiManager
+import com.shoumei.xhn.login.manager.UserManager
 import com.shoumei.xhn.mine.data.MineLoader
 import com.shoumei.xhn.mine.model.CommonData
 import com.shoumei.xhn.mine.model.MineNavEntity
@@ -41,16 +42,23 @@ class MinePresenter(private var iMineView: IMineView?) : BasePresenter<IMineView
         bottomTitles.add(MineNavEntity(SmApplication.getApp().getString(R.string.iconMineOrder), "发出的红包"))
         bottomTitles.add(MineNavEntity(SmApplication.getApp().getString(R.string.iconMineHelp), "帮助中心"))
         bottomTitles.add(MineNavEntity(SmApplication.getApp().getString(R.string.iconAddress), "地址管理"))
-        iMineView?.buttomNavData(bottomTitles)
+        iMineView?.bottomNavData(bottomTitles)
     }
 
     //加载通用数据
     fun loadCommonData(){
+        //加载本地缓存
+        UserManager.getCommon()?.let {
+            iMineView?.onCommonData(it)
+        }
+
         iMineView?.showLoading()
         mineLoader?.loadCommonData(object :ApiManager.OnResult<BaseModel<CommonData>>(){
             override fun onSuccess(data: BaseModel<CommonData>) {
                 iMineView?.hideLoading()
-                iMineView?.onCommonData(data)
+                data.message?.let {
+                    iMineView?.onCommonData(it)
+                }
             }
 
             override fun onFailed(code: String, message: String) {

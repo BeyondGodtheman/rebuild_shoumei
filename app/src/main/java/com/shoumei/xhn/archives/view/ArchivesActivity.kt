@@ -5,10 +5,10 @@ import android.view.View
 import com.shoumei.xhn.R
 import com.shoumei.xhn.archives.presenter.ArchivesPresenter
 import com.shoumei.xhn.base.BaseActivity
+import com.shoumei.xhn.base.ErrorViewType
 import com.shoumei.xhn.mine.model.Profile
 import com.shoumei.xhn.utils.CameraPhotoUtils
 import com.shoumei.xhn.utils.GlideApp
-import com.shoumei.xhn.utils.LoadingUtil
 import com.shoumei.xhn.widget.dialog.PhotoDialog
 import kotlinx.android.synthetic.main.activity_archive.*
 import kotlinx.android.synthetic.main.activity_base.*
@@ -16,7 +16,7 @@ import java.io.File
 
 /**
  * 档案页面
- * Created by ZhangYe on 2018/9/20.
+ * Created by 张野 on 2018/9/20.
  */
 class ArchivesActivity : BaseActivity(), IArchivesView, PhotoDialog.OnItemClickListener {
 
@@ -24,9 +24,6 @@ class ArchivesActivity : BaseActivity(), IArchivesView, PhotoDialog.OnItemClickL
         ArchivesPresenter(this)
     }
 
-    private val loadingUtil: LoadingUtil by lazy {
-        LoadingUtil(frameBody)
-    }
 
     private val cameraUtils: CameraPhotoUtils by lazy {
         CameraPhotoUtils(this, object : CameraPhotoUtils.OnResultListener {
@@ -48,16 +45,9 @@ class ArchivesActivity : BaseActivity(), IArchivesView, PhotoDialog.OnItemClickL
     }
 
     override fun loadData() {
-        presenter.loadArchives(true) //网络请求加载
+        presenter.loadArchives() //网络请求加载
     }
 
-    override fun showLoading() {
-        loadingUtil.showLoading()
-    }
-
-    override fun hideLoading() {
-        loadingUtil.hideLoading()
-    }
 
     //展示档案数据
     override fun showArchiveData(profile: Profile) {

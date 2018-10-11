@@ -11,5 +11,7 @@ interface IBaseView {
 
     fun hideLoading()
 
-    fun showError(errorType: ErrorViewType) {}
+    fun showError(errorType: ErrorViewType)
+
+    fun hideError()
 }
