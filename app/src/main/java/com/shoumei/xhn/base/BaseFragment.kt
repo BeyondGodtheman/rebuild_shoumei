@@ -63,7 +63,13 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     abstract fun loadData()
 
 
+    override fun showMessage(message: String) {
+        getBaseActivity().showMessage(message)
+    }
+
     override fun showLoading() {
+        getBaseActivity().hideLoading()
+        hideLoading()
         iframeBody.addView(getBaseActivity().loadingView)
     }
 
@@ -71,8 +77,9 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
         iframeBody.removeView(getBaseActivity().loadingView)
     }
 
-
     override fun showError(errorType: ErrorViewType) {
+        hideError()
+        getBaseActivity().hideError()
         iframeBody.addView(getBaseActivity().errorView)
     }
 

@@ -5,7 +5,6 @@ import com.shoumei.xhn.archives.data.ArchivesType
 import com.shoumei.xhn.archives.view.IArchivesView
 import com.shoumei.xhn.base.BaseModel
 import com.shoumei.xhn.base.BasePresenter
-import com.shoumei.xhn.base.ErrorViewType
 import com.shoumei.xhn.base.IBaseView
 import com.shoumei.xhn.http.ApiManager
 import com.shoumei.xhn.login.manager.UserManager
@@ -20,8 +19,8 @@ import java.io.File
  */
 class ArchivesPresenter(private var iArchivesView: IArchivesView?) : BasePresenter<IBaseView>(iArchivesView) {
 
-    var archivesLoader: ArchivesLoader? = null
-    var upLoader: UpLoader? = null
+    private var archivesLoader: ArchivesLoader? = null
+    private var upLoader: UpLoader? = null
 
     init {
         onCreate()
@@ -37,7 +36,7 @@ class ArchivesPresenter(private var iArchivesView: IArchivesView?) : BasePresent
         iArchivesView?.showLoading()
         archivesLoader?.loadArchives(object : ApiManager.OnResult<BaseModel<Profile>>() {
             override fun onSuccess(data: BaseModel<Profile>) {
-                iArchivesView?.hideLoading()
+                hideLoading()
                 data.message?.let {
                     UserManager.setProfile(it) //本地存储
                     iArchivesView?.showArchiveData(it)
@@ -45,8 +44,8 @@ class ArchivesPresenter(private var iArchivesView: IArchivesView?) : BasePresent
             }
 
             override fun onFailed(code: String, message: String) {
-                iArchivesView?.hideLoading()
-                iArchivesView?.showError(ErrorViewType.NO_NETWORK)
+                hideLoading()
+                showError(code, message)
             }
         })
     }
@@ -56,31 +55,31 @@ class ArchivesPresenter(private var iArchivesView: IArchivesView?) : BasePresent
         iArchivesView?.showLoading()
         archivesLoader?.modifyArchives(type, value, object : ApiManager.OnResult<BaseModel<String>>() {
             override fun onSuccess(data: BaseModel<String>) {
-                iArchivesView?.hideLoading()
+                hideLoading()
                 loadArchives()
             }
 
             override fun onFailed(code: String, message: String) {
-                iArchivesView?.hideLoading()
-                ToastUtil.show(message)
+                hideLoading()
+                showMessage(message)
             }
         })
     }
 
     //上传头像并更新档案
-    fun upDataAvatar(file:File){
-        iArchivesView?.showLoading()
-        upLoader?.updatePhoto(file,object :ApiManager.OnResult<BaseModel<ArrayList<String>>>(){
+    fun upDataAvatar(file: File) {
+        showLoading()
+        upLoader?.updatePhoto(file, object : ApiManager.OnResult<BaseModel<ArrayList<String>>>() {
             override fun onSuccess(data: BaseModel<ArrayList<String>>) {
-                iArchivesView?.hideLoading()
+                hideLoading()
                 data.message?.let {
-                    modifyArchives(ArchivesType.AVATAR,it[0])
+                    modifyArchives(ArchivesType.AVATAR, it[0])
                 }
             }
 
             override fun onFailed(code: String, message: String) {
-                iArchivesView?.hideLoading()
-                ToastUtil.show(message)
+                hideLoading()
+                showMessage(message)
             }
 
         })

@@ -1,6 +1,7 @@
 package com.shoumei.xhn.setting.view
 
 import com.shoumei.xhn.base.IBaseView
+import com.shoumei.xhn.mine.model.CommonData
 
 /**
  * 设置页面View接口
@@ -9,7 +10,6 @@ import com.shoumei.xhn.base.IBaseView
 interface ISettingView : IBaseView {
     //显示缓存数量
     fun showCacheSize(size: String)
-
-
-    fun showMessage(message:String)
+    //通用档案资料
+    fun loadCommonData(commonData: CommonData)
 }

@@ -14,4 +14,6 @@ interface IBaseView {
     fun showError(errorType: ErrorViewType)
 
     fun hideError()
+
+    fun showMessage(message:String)
 }

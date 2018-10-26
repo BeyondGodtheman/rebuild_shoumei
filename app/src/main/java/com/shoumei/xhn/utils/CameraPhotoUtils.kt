@@ -164,15 +164,14 @@ class CameraPhotoUtils(private var activity: BaseActivity?, private var onResult
     //初始化图片文件及URI
     private fun initFile() {
         file = FileUtils().getFile("${System.currentTimeMillis()}.jpg")
-        file?.let {
-            val file = it
+        file?.let { file ->
             uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 activity?.let {
                     FileProvider.getUriForFile(it, "${it.packageName}.provider", file)
                 }
 
             } else {
-                Uri.fromFile(it)
+                Uri.fromFile(file)
             }
         }
 

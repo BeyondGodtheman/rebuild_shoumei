@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.shoumei.xhn.R
 import com.shoumei.xhn.title.TitleManager
+import com.shoumei.xhn.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.layout_error.view.*
 
@@ -45,6 +47,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
         errorView.btnNext.setOnClickListener {
             hideError()
             loadData()
+            update()
         }
 
         initView()
@@ -87,7 +90,9 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
     }
 
     override fun showLoading() {
+        hideLoading()
         loadingView.setOnClickListener {  }
+
         frameBody.addView(loadingView)
     }
 
@@ -95,16 +100,20 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
         frameBody.removeView(loadingView)
     }
 
-
     override fun showError(errorType: ErrorViewType) {
-
+        hideError()
         frameBody.addView(errorView)
+        errorView.setOnClickListener {  }
+        errorView.tvDesc.text = errorType.errorMessage
     }
 
     override fun hideError() {
         frameBody.removeView(errorView)
     }
 
+    override fun showMessage(message: String) {
+        ToastUtil.show(message)
+    }
 
     override fun onResume() {
         super.onResume()

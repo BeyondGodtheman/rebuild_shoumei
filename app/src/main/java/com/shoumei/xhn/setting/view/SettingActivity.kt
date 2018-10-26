@@ -3,13 +3,14 @@ package com.shoumei.xhn.setting.view
 import android.content.Intent
 import android.view.View
 import com.shoumei.xhn.R
+import com.shoumei.xhn.archives.view.ArchivesActivity
 import com.shoumei.xhn.base.BaseActivity
-import com.shoumei.xhn.widget.dialog.SmediaDialog
 import com.shoumei.xhn.login.manager.UserManager
+import com.shoumei.xhn.mine.model.CommonData
 import com.shoumei.xhn.setting.presenter.SettingPresenter
 import com.shoumei.xhn.title.TitleManager
 import com.shoumei.xhn.utils.GlideApp
-import com.shoumei.xhn.utils.ToastUtil
+import com.shoumei.xhn.widget.dialog.SmediaDialog
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.activity_setting.*
 
@@ -31,6 +32,7 @@ class SettingActivity : BaseActivity(), ISettingView {
         settingPresenter?.onCreate()
         settingPresenter?.getCacheSize() //获取缓存大小
         //注册点击事件
+        rlHead.setOnClickListener(this)
         resetPayPwd.setOnClickListener(this)
         isvCache.setOnClickListener(this)
         isvAbout.setOnClickListener(this)
@@ -38,34 +40,37 @@ class SettingActivity : BaseActivity(), ISettingView {
     }
 
     override fun update() {
-        UserManager.getCommon()?.let {
-            tvName.text = it.nickname
-            tvNo.text = (getString(R.string.no) + it.smno)
-            paypass = it.paypass
-            isvPhoto.setValue(it.phone?:"","")
-            GlideApp.with(this)
-                    .load(it.avatar)
-                    .placeholder(R.drawable.defalut_updata_image)
-                    .into(ivHead)
-        }
+        //加载资料数据
+        settingPresenter?.loadCommonData()
     }
 
     override fun loadData() {
+    }
+
+    override fun loadCommonData(commonData: CommonData) {
+        commonData.apply {
+            tvName.text = nickname
+            tvNo.text = (getString(R.string.no) + smno)
+            this@SettingActivity.paypass = paypass
+            isvPhoto.setValue(phone ?: "", "")
+            GlideApp.with(this@SettingActivity)
+                    .load(avatar)
+                    .placeholder(R.drawable.defalut_updata_image)
+                    .into(ivHead)
+        }
     }
 
     override fun showCacheSize(size: String) {
         isvCache.setValue(size)
     }
 
-    override fun showMessage(message: String) {
-        ToastUtil.show(message)
-    }
 
     override fun close() {
     }
 
     override fun onClick(view: View) {
         when (view.id) {
+            rlHead.id -> startActivity(Intent(this, ArchivesActivity::class.java))
             resetPayPwd.id -> modifyPay() //修改支付密码
             isvCache.id -> clear() //清楚缓存
             isvAbout.id -> startActivity(Intent(this, AboutActivity::class.java))
