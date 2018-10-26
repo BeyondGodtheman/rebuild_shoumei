@@ -3,7 +3,6 @@
 
     <declare-styleable name="ItemShowView">
         <attr name="nameText" format="string" />
-        <attr name="valueText" format="string" />
     </declare-styleable>
 
 

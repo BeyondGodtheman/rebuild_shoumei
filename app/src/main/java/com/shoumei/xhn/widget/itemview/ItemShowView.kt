@@ -19,50 +19,32 @@ class ItemShowView : RelativeLayout {
         initView(attrs)
     }
 
+    private var value:String = ""
+
 
     fun initView(attrs: AttributeSet?) {
         LayoutInflater.from(context).inflate(R.layout.layout_item_show, this, true)
         attrs?.let {
             val typedArray = context.obtainStyledAttributes(it, R.styleable.ItemShowView)
             val name = typedArray.getString(R.styleable.ItemShowView_nameText)
-            val value = typedArray.getString(R.styleable.ItemShowView_valueText)
             typedArray.recycle()
             if (name != null) {
                 tvName.text = name
             }
-            if (value != null) {
-                tvIcon.text = value
-            }
         }
     }
 
-    fun setIcon(iconStr: String) {
-        tvIcon.text = iconStr
-        tvIcon.visibility = View.VISIBLE
+
+    fun setValue(value: String) {
+        setValue(value,resources.getString(R.string.iconMore))
+    }
+
+    fun setValue(value: String, iconStr: String) {
+        this.value = value
+        tvIcon.text = ("$value  $iconStr")
     }
 
 
-    fun setNoValueIcon(iconStr: String) {
-        setIcon(iconStr)
-        tvValue.visibility = View.GONE
-    }
-
-
-    fun setValue(value: String?) {
-        tvValue.text = value
-        tvValue.visibility = View.VISIBLE
-    }
-
-    fun setNoIconValue(value: String?) {
-        setValue(value)
-        tvIcon.visibility = View.GONE
-        (llayoutValue.layoutParams as RelativeLayout.LayoutParams).rightMargin = context.resources.getDimension(R.dimen.w50).toInt()
-    }
-
-    fun setName(name: String?) {
-        tvName.text = name
-    }
-
-    fun getValue(): String = tvValue.text.toString()
+    fun getValue(): String = value
 
 }

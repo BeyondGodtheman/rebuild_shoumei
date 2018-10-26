@@ -1,17 +1,14 @@
 package com.shoumei.xhn.http
 
-import com.shoumei.xhn.utils.DataKey
-import com.shoumei.xhn.utils.SharedUtil
-
 /**
  * 接口配置清单
  * Created by zhangye on 2017/10/12.
  */
 object Constant {
 
-    fun isDebug(): Boolean = !SharedUtil.getBoolean(DataKey.ISDEBUG, true)
+    fun isDebug(): Boolean = true
 
-    var SHOWLOG = true //是否打印LOG
+    var isLog = true //是否打印LOG
 
     const val APP_SECRET = "SM_ANDROID" //接口SECRET
     const val VERSION = "v1"  //接口版本

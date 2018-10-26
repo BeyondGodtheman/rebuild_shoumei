@@ -47,6 +47,7 @@
     <string name="littleMaster">小主!</string>
     <string name="perfection">完善度</string>
     <string name="archiveDesc">您的资料完善度越高,收到的红包越多,\n我们对您的服务需求越精准哦~</string>
+    <string name="interestDesc">我们将根据您的喜好为您推荐红包</string>
 
     <!--图片上传Dialog-->
     <string name="photoUpload">拍照上传</string>

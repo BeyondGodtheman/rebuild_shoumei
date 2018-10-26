@@ -144,8 +144,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:paddingLeft="@dimen/w120"
-                android:text="我们将根据您的喜好为您推荐红包"
+                android:paddingStart="@dimen/w120"
+                android:paddingEnd="@dimen/w50"
+                android:text="@string/interestDesc"
                 android:textColor="@color/red"
                 android:textSize="@dimen/h40" />
         </com.shoumei.xhn.widget.itemview.ItemShowView>

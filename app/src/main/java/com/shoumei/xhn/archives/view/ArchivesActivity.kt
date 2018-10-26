@@ -3,11 +3,13 @@ package com.shoumei.xhn.archives.view
 import android.content.Intent
 import android.view.View
 import com.shoumei.xhn.R
+import com.shoumei.xhn.archives.data.ArchivesType
 import com.shoumei.xhn.archives.presenter.ArchivesPresenter
 import com.shoumei.xhn.base.BaseActivity
 import com.shoumei.xhn.mine.model.Profile
 import com.shoumei.xhn.utils.CameraPhotoUtils
 import com.shoumei.xhn.utils.GlideApp
+import com.shoumei.xhn.utils.PickerViewUtils
 import com.shoumei.xhn.widget.dialog.PhotoDialog
 import kotlinx.android.synthetic.main.activity_archive.*
 import kotlinx.android.synthetic.main.activity_base.*
@@ -21,6 +23,10 @@ class ArchivesActivity : BaseActivity(), IArchivesView, PhotoDialog.OnItemClickL
 
     private val presenter: ArchivesPresenter by lazy {
         ArchivesPresenter(this)
+    }
+
+    private val pickerViewUtils:PickerViewUtils by lazy {
+        PickerViewUtils(this)
     }
 
 
@@ -37,6 +43,7 @@ class ArchivesActivity : BaseActivity(), IArchivesView, PhotoDialog.OnItemClickL
     override fun initView() {
         frameTitle.addView(titleManager.defaultTitle("档案"))
         ivHead.setOnClickListener(this)
+        isvBirthday.setOnClickListener(this)
     }
 
     override fun update() {
@@ -76,6 +83,11 @@ class ArchivesActivity : BaseActivity(), IArchivesView, PhotoDialog.OnItemClickL
                 val dialog = PhotoDialog(this)
                 dialog.setOnItemClickListener(this)
                 dialog.show()
+            }
+            isvBirthday.id -> {
+                pickerViewUtils.showYmd { dateStr: String, _: String ->
+                    presenter.modifyArchives(ArchivesType.BIRTH,dateStr)
+                }
             }
         }
     }

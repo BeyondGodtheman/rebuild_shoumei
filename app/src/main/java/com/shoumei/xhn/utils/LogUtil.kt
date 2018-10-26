@@ -13,12 +13,12 @@ import com.shoumei.xhn.http.Constant
 
 object LogUtil {
     private var customTagPrefix = ""
-    private var allowD = Constant.SHOWLOG
-    private var allowE = Constant.SHOWLOG
-    private var allowI = Constant.SHOWLOG
-    private var allowV = Constant.SHOWLOG
-    private var allowW = Constant.SHOWLOG
-    private var allowWtf = Constant.SHOWLOG
+    private var allowD = Constant.isLog
+    private var allowE = Constant.isLog
+    private var allowI = Constant.isLog
+    private var allowV = Constant.isLog
+    private var allowW = Constant.isLog
+    private var allowWtf = Constant.isLog
     private var customLogger: CustomLogger? = null
 
 

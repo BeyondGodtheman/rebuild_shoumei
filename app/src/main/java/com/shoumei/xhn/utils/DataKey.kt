@@ -6,6 +6,6 @@ package com.shoumei.xhn.utils
  */
 object DataKey {
 
-    const val ISDEBUG = "isDebug" //是否是debug模式
+    const val DEBUG = "debug" //是否是debug模式
     const val LOCATION = "location" //定位信息
 }

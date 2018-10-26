@@ -35,21 +35,17 @@ object ApiManager {
     private lateinit var apiService: ApiService
     private lateinit var retrofit: Retrofit
     private lateinit var okHttpClient: OkHttpClient
-    private val gson = Gson()
-    private lateinit var host: String
+    private val gSon = Gson()
 
     const val STRING = 0X1
-    const val ORTHER = 0x2
+    const val OTHER = 0x2
 
     init {
         init()
     }
 
 
-    fun getHost(): String {
-        host = if (Constant.isDebug()) "http://test.api.shoumeiapp.com" else "http://api.shoumeiapp.com"
-        return "http://dev.api.shoumeiapp.com"
-    }
+    private fun getHost(): String = if (Constant.isDebug()) "http://dev.api.shoumeiapp.com" else "http://api.shoumeiapp.com"
 
 
     fun init() {
@@ -192,7 +188,7 @@ object ApiManager {
                 tag = STRING
             } else {
                 typeToken = args[0]
-                tag = ORTHER
+                tag = OTHER
             }
         }
 
@@ -213,17 +209,18 @@ object ApiManager {
                     val jsonObj = JSONObject(json)
                     val status = jsonObj.opt("status").toString()
                     if (status == "200") {
-                        val baseModel = gson.fromJson<T>(json, onResult.typeToken)
+                        val baseModel = gSon.fromJson<T>(json, onResult.typeToken)
                         onResult.onSuccess(baseModel)
                     } else {
                         val message = jsonObj.opt("message").toString()
+                        ToastUtil.show(message)
                         onResult.onFailed(status, message)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
             } else {
-                onResult.onSuccess(gson.fromJson(json, onResult.typeToken))
+                onResult.onSuccess(gSon.fromJson(json, onResult.typeToken))
             }
         }
     }

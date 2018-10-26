@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_setting.*
 
 /**
  * 设置页面
- * Created by zhangye on 2018/8/24.
+ * Created by ZhangYe on 2018/8/24.
  */
 class SettingActivity : BaseActivity(), ISettingView {
 
@@ -42,7 +42,7 @@ class SettingActivity : BaseActivity(), ISettingView {
             tvName.text = it.nickname
             tvNo.text = (getString(R.string.no) + it.smno)
             paypass = it.paypass
-            isvPhoto.setNoIconValue(it.phone)
+            isvPhoto.setValue(it.phone?:"","")
             GlideApp.with(this)
                     .load(it.avatar)
                     .placeholder(R.drawable.defalut_updata_image)
@@ -54,7 +54,7 @@ class SettingActivity : BaseActivity(), ISettingView {
     }
 
     override fun showCacheSize(size: String) {
-        isvCache.setNoIconValue(size)
+        isvCache.setValue(size)
     }
 
     override fun showMessage(message: String) {
@@ -66,7 +66,7 @@ class SettingActivity : BaseActivity(), ISettingView {
 
     override fun onClick(view: View) {
         when (view.id) {
-            resetPayPwd.id -> motifyPay() //修改支付密码
+            resetPayPwd.id -> modifyPay() //修改支付密码
             isvCache.id -> clear() //清楚缓存
             isvAbout.id -> startActivity(Intent(this, AboutActivity::class.java))
             btnLogOut.id -> logout() //退出登录
@@ -74,7 +74,7 @@ class SettingActivity : BaseActivity(), ISettingView {
     }
 
 
-    private fun motifyPay() {
+    private fun modifyPay() {
         if (paypass == 0) {
             val dialog = SmediaDialog(this)
             dialog.setTitle("您未设置过支付密码，设置前将验证您的身份，即将发送验证码到" + UserManager.getCryptogramPhone())
