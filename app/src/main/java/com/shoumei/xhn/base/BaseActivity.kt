@@ -1,128 +1,118 @@
 package com.shoumei.xhn.base
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import com.shoumei.xhn.R
 import com.shoumei.xhn.title.TitleManager
 import com.shoumei.xhn.utils.ToastUtil
+import com.shoumei.xhn.widget.utils.OverlayViewUtils
 import kotlinx.android.synthetic.main.activity_base.*
-import kotlinx.android.synthetic.main.layout_error.view.*
 
-
-@SuppressLint("Registered")
 
 /**
  *
- * Created by 张野 on 2018/8/2.
+ * Created by ZhangYe on 2018/8/2.
  */
+@SuppressLint("SourceLockedOrientationActivity")
 abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListener {
 
-    val loadingView: View by lazy {
-        View.inflate(this, R.layout.layout_loading, null)
-    }
+    private var savedInstanceState: Bundle? = null
 
-    val errorView: View by lazy {
-        View.inflate(this, R.layout.layout_error, null)
-    }
+    private val overlayViewBean = OverlayViewUtils()
 
     lateinit var titleManager: TitleManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.savedInstanceState = savedInstanceState
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //强制屏幕
         titleManager = TitleManager(this)
         setContentView(R.layout.activity_base)
         val bodyView = LayoutInflater.from(this).inflate(setLayout(), null, false)
         frameBody.addView(bodyView)
-
-        loadingView.setOnClickListener {  }
-        errorView.setOnClickListener {  }
-        errorView.btnNext.setOnClickListener {
-            hideError()
-            loadData()
-            update()
-        }
-
         initView()
         loadData()
     }
 
+    /**
+     * 设置布局操作
+     */
     abstract fun setLayout(): Int
 
+    /**
+     * 初始化View操作
+     */
     abstract fun initView()
 
-    abstract fun update()
-
-
+    /**
+     * 加载数据操作
+     */
     abstract fun loadData()
 
-    abstract fun close()
-
-
-
-    override fun onTouchEvent(event: MotionEvent): Boolean {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (event.action == MotionEvent.ACTION_DOWN) {
-            if (this.currentFocus != null) {
-                if (this.currentFocus?.windowToken != null) {
-                    imm.hideSoftInputFromWindow(this.currentFocus?.windowToken,
-                            InputMethodManager.HIDE_NOT_ALWAYS)
-                }
-            }
-        }
-        return super.onTouchEvent(event)
-    }
-
+    /**
+     * 点击事件回调
+     */
+    abstract fun onClickEvent(view: View)
 
     /**
-     * 隐藏输入法键盘
+     * 获取title容器
      */
-    fun hideKeyboard() {
-        val im = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        im.hideSoftInputFromWindow(this.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-    }
+    fun getFrameTitle(): ViewGroup = frameTitle
 
+    /**
+     * 显示loading覆盖层
+     */
     override fun showLoading() {
-        hideLoading()
-        loadingView.setOnClickListener {  }
-
-        frameBody.addView(loadingView)
+        overlayViewBean.showView(frameBody, overlayViewBean.loading)
     }
 
+    /**
+     * 隐藏loading覆盖层
+     */
     override fun hideLoading() {
-        frameBody.removeView(loadingView)
+        overlayViewBean.hideView(frameBody, overlayViewBean.loading)
     }
 
+    /**
+     * 显示error覆盖层
+     */
     override fun showError(errorType: ErrorViewType) {
-        hideError()
-        frameBody.addView(errorView)
-        errorView.setOnClickListener {  }
-        errorView.tvDesc.text = errorType.errorMessage
+        overlayViewBean.showView(frameBody, overlayViewBean.networkError)
     }
 
+    /**
+     * 隐藏error覆盖层
+     */
     override fun hideError() {
-        frameBody.removeView(errorView)
+        overlayViewBean.hideView(frameBody, overlayViewBean.networkError)
     }
 
+    /**
+     * 显示Toast
+     */
     override fun showMessage(message: String) {
         ToastUtil.show(message)
     }
 
-    override fun onResume() {
-        super.onResume()
-        update()
+    /**
+     * 注册点击事件
+     * @param views 注册事件的View
+     */
+    fun setOnClickListener(vararg views: View) {
+        views.forEach {
+            it.setOnClickListener(this)
+        }
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-        close()
+    /**
+     * 点击事件
+     */
+    override fun onClick(view: View) {
+        onClickEvent(view)
     }
 }

@@ -5,16 +5,9 @@
     android:clipChildren="false"
     android:orientation="vertical">
 
-   <FrameLayout
-       android:id="@id/frameContent"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_above="@+id/llParent" />
-
-   <include
-       android:id="@+id/llParent"
-       layout="@layout/include_menu"
+   <Button
+       android:id="@+id/btn_loading"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_alignParentBottom="true" />
+       android:text="显示loading"/>
 </RelativeLayout>

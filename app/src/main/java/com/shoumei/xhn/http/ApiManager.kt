@@ -14,6 +14,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.*
+import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Retrofit
@@ -54,7 +55,9 @@ object ApiManager {
         */
         okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(HeaderInterceptor())
-                .addInterceptor(LoggerInterceptor("网络请求"))
+                .addNetworkInterceptor(HttpLoggingInterceptor().apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                })
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 //其他配置
@@ -86,7 +89,6 @@ object ApiManager {
 
                     override fun onNext(data: ResponseBody) {
                         val body = data.string()
-                        LogUtil.e("Body:$body")
                         parserJson(body, onResult)
                     }
 

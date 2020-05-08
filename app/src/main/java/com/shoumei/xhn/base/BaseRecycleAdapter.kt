@@ -4,22 +4,22 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.shoumei.xhn.click.OnItemClickListener
 
 /**
  * baseAdapter
  * Created by zhangye on 2018/1/5.
  */
-abstract class BaseRecycleAdapter<T>(var list: ArrayList<T>) : RecyclerView.Adapter<BaseRecycleViewHolder>() {
+abstract class BaseRecycleAdapter<T>(private var list: ArrayList<T>) : RecyclerView.Adapter<BaseRecycleViewHolder>() {
     private var isDouble = false
-    private var onItemClickListener: OnItemClickListener? = null
+    private var onItemClickListener: ((view: View, position: Int) -> Unit)? = null
     lateinit var context: Context
+
     /*
      * 创建ViewHolder
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseRecycleViewHolder {
         context = parent.context
-        return BaseRecycleViewHolder(setLayout(parent, viewType),onItemClickListener)
+        return BaseRecycleViewHolder(setLayout(parent, viewType), onItemClickListener)
     }
 
     /*
@@ -35,6 +35,7 @@ abstract class BaseRecycleAdapter<T>(var list: ArrayList<T>) : RecyclerView.Adap
 
     fun getData(position: Int): T = list[position]
 
+
     fun deleteData(position: Int) {
         list.removeAt(position)
     }
@@ -42,7 +43,7 @@ abstract class BaseRecycleAdapter<T>(var list: ArrayList<T>) : RecyclerView.Adap
     /*
      * 子条目点击事件
      */
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+    fun setOnItemClickListener(onItemClickListener: ((view: View, position: Int) -> Unit)) {
         this.onItemClickListener = onItemClickListener
     }
 

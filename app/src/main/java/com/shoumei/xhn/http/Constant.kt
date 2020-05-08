@@ -10,6 +10,8 @@ object Constant {
 
     var isLog = true //是否打印LOG
 
+    fun getHost(): String = if (Constant.isDebug()) "http://dev.api.shoumeiapp.com" else "http://api.shoumeiapp.com"
+
     const val APP_SECRET = "SM_ANDROID" //接口SECRET
     const val VERSION = "v1"  //接口版本
     const val CLIENT = "android"

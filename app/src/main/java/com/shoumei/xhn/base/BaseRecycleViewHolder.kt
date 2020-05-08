@@ -3,7 +3,6 @@ package com.shoumei.xhn.base
 import android.support.v7.widget.RecyclerView
 import android.util.SparseArray
 import android.view.View
-import com.shoumei.xhn.click.OnItemClickListener
 
 /**
  *
@@ -11,10 +10,10 @@ import com.shoumei.xhn.click.OnItemClickListener
  */
 @Suppress("UNCHECKED_CAST")
 class BaseRecycleViewHolder(itemView: View,
-                            onItemClickListener: OnItemClickListener?) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+                            onItemClickListener: ((view: View, position: Int) -> Unit)?) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     private val viewMap = SparseArray<View>()
-    private var onItemClickListener: OnItemClickListener? = null
+    private var onItemClickListener: ((view: View, position: Int) -> Unit)? = null
 
     init {
         if (onItemClickListener != null) {
@@ -33,6 +32,6 @@ class BaseRecycleViewHolder(itemView: View,
     }
 
     override fun onClick(v: View) {
-        onItemClickListener?.onItemClick(v, adapterPosition)
+        onItemClickListener?.invoke(v, adapterPosition)
     }
 }

@@ -5,8 +5,6 @@ import android.graphics.Typeface
 import android.provider.Settings
 import android.support.multidex.MultiDexApplication
 import com.shoumei.xhn.utils.DigestUtils
-import xiaofei.library.datastorage.DataStorageFactory
-import xiaofei.library.datastorage.IDataStorage
 import java.util.*
 
 /**
@@ -15,7 +13,6 @@ import java.util.*
  */
 class SmApplication : MultiDexApplication() {
     private val storeMap = HashMap<String, Any>() //内存数据存储
-    lateinit var dataStorage: IDataStorage //持久化数据存储
     lateinit var iconFontType: Typeface  //字体图库
 
     /**
@@ -32,13 +29,11 @@ class SmApplication : MultiDexApplication() {
 
         iconFontType = Typeface.createFromAsset(assets, "font/iconfont.ttf") //加载字体库文件
 
-        //初始持久化数据存储
-        dataStorage = DataStorageFactory.getInstance(applicationContext, DataStorageFactory.TYPE_DATABASE)
     }
 
     @SuppressLint("HardwareIds")
-    fun getDeviceID():String{
-       return DigestUtils.md5(Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID))
+    fun getDeviceID(): String {
+        return DigestUtils.md5(Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID))
     }
 
     @Suppress("UNCHECKED_CAST")

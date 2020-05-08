@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.shoumei.xhn.R
+import com.shoumei.xhn.widget.utils.OverlayViewUtils
 import kotlinx.android.synthetic.main.fragment_base.*
 import kotlinx.android.synthetic.main.fragment_base.view.*
+
 
 /**
  *
@@ -16,11 +18,12 @@ import kotlinx.android.synthetic.main.fragment_base.view.*
  */
 abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     private var savedInstanceState: Bundle? = null
-    private var mView: View? = null
+
+    private val overlayViewBean = OverlayViewUtils()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         this.savedInstanceState = savedInstanceState
-        mView = inflater.inflate(R.layout.fragment_base, container, false)
+        val mView = inflater.inflate(R.layout.fragment_base, container, false)
         mView?.iframeBody?.addView(inflater.inflate(setLayout(), container, false))
         initView()
         loadData()
@@ -28,19 +31,19 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     }
 
 
-    //沉浸式Title
+    /**
+     * 沉浸式Title
+     */
     fun immersionTitle() {
-        mView?.iframeBody?.apply {
+        iframeBody?.apply {
             (layoutParams as RelativeLayout.LayoutParams).addRule(RelativeLayout.BELOW, 0)
         }
-        mView?.iframeTitle?.setBackgroundResource(R.color.transparent)
+        iframeTitle?.setBackgroundResource(R.color.transparent)
 
     }
 
 
-    fun getLayoutView(): View? = mView
-
-    fun getBaseActivity(): BaseActivity = activity as BaseActivity
+    fun getBaseActivity(): BaseActivity = requireActivity() as BaseActivity
 
 
     override fun onDestroy() {
@@ -68,25 +71,20 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     }
 
     override fun showLoading() {
-        getBaseActivity().hideLoading()
-        hideLoading()
-        iframeBody.addView(getBaseActivity().loadingView)
+        overlayViewBean.showView(iframeBody, overlayViewBean.loading)
     }
 
     override fun hideLoading() {
-        iframeBody.removeView(getBaseActivity().loadingView)
+        overlayViewBean.hideView(iframeBody, overlayViewBean.loading)
     }
 
     override fun showError(errorType: ErrorViewType) {
-        hideError()
-        getBaseActivity().hideError()
-        iframeBody.addView(getBaseActivity().errorView)
+        overlayViewBean.showView(iframeBody, overlayViewBean.networkError)
     }
 
     override fun hideError() {
-        iframeBody.removeView(getBaseActivity().errorView)
+        overlayViewBean.hideView(iframeBody, overlayViewBean.networkError)
     }
-
 
     abstract fun close()
 }
