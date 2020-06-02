@@ -76,7 +76,7 @@ dependencies {
     //retrofit 的RxJava扩展库
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     //google的JSON解析库
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     //图片加载
     implementation 'com.github.bumptech.glide:glide:4.9.0'

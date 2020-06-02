@@ -9,9 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.shoumei.xhn.R
 import com.shoumei.xhn.title.TitleManager
+import com.shoumei.xhn.utils.LogUtil
 import com.shoumei.xhn.utils.ToastUtil
 import com.shoumei.xhn.widget.utils.OverlayViewUtils
 import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 
 
 /**
@@ -19,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_base.*
  * Created by ZhangYe on 2018/8/2.
  */
 @SuppressLint("SourceLockedOrientationActivity")
-abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListener {
+abstract class BaseActivity : AppCompatActivity(), CoroutineScope by MainScope(),IBaseView, View.OnClickListener {
 
     private var savedInstanceState: Bundle? = null
 
@@ -114,5 +118,11 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
      */
     override fun onClick(view: View) {
         onClickEvent(view)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
+        LogUtil.i("页面销毁")
     }
 }
