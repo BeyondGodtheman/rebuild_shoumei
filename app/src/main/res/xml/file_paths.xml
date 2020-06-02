@@ -3,5 +3,5 @@
     <!--外部存储空间根目录-->
     <external-path
         name="app_cache"
-        path="com.shoumei.xhn/temp/" />
+        path="com.sunnyfor.xhn/temp/" />
 </paths>

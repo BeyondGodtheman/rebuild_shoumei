@@ -1,4 +1,8 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.zhangye98@foxmail.com'
 
 apply plugin: 'kotlin-android'
 
@@ -9,8 +13,8 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.shoumei.xhn"
         minSdkVersion 19
+        //noinspection OldTargetApi
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -31,28 +35,12 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-
-    signingConfigs {
-        release {
-            //密匙内容
-            storeFile file("../joln.jks")
-            storePassword "123456"
-            keyAlias "key0"
-            keyPassword "123456"
-        }
-
-        debug {
-            storeFile file("../joln.jks")
-            storePassword "123456"
-            keyAlias "key0"
-            keyPassword "123456"
-        }
-    }
 }
 
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
@@ -67,24 +55,14 @@ dependencies {
     //Kotlin协程库
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.2.1"
 
-    //RxJava库
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
-    //android版本的RxJava 依赖RxJava库
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    //retrofit OkHttp封装库
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    //retrofit 的RxJava扩展库
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     //google的JSON解析库
     implementation 'com.google.code.gson:gson:2.8.6'
 
     //图片加载
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
-
     implementation 'jp.wasabeef:glide-transformations:3.3.0'
     implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
-
     //支持圆角圆形的ImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'
 }
