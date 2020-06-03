@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'com.github.zhangye98@foxmail.com'
+group = 'com.github.Sunny'
 
 apply plugin: 'kotlin-android'
 
