@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<paths>
-    <!--外部存储空间根目录-->
-    <external-path
-        name="app_cache"
-        path="com.sunnyfor.xhn/temp/" />
-</paths>
