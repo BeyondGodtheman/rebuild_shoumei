@@ -23,7 +23,7 @@ class VersionUpdatePresenter(view: VersionUpdateContract.View) :
         launch(Main) {
             val versionBean = versionUpdateModel.checkVersion(version)
             if (versionBean != null) {
-                if (versionBean.versionCode ?: 0 > version) {
+                if (versionBean.versionCode > version) {
                     view?.showVersionUpdate(versionBean)
                 } else {
                     view?.noNewVersion()

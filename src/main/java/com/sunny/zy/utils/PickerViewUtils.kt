@@ -23,7 +23,7 @@ class PickerViewUtils(var context: Context) {
         val calendar = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog(
             context,
-            DatePickerDialog.THEME_HOLO_LIGHT,
+            R.style.Theme_MaterialComponents_Dialog_Alert,
             DatePickerDialog.OnDateSetListener { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
                 calendar.set(year, month, dayOfMonth)
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())

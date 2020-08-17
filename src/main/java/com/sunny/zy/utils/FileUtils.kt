@@ -106,8 +106,8 @@ object FileUtils {
         val file = File(filePath)
         if (file.isDirectory) {
             val files = file.listFiles()
-            for (file1 in files) {
-                deleteFolderFile(file1.absolutePath)
+            files?.forEach {
+                deleteFolderFile(it.absolutePath)
             }
         } else {
             file.delete()
