@@ -129,7 +129,7 @@
     <!--菜单条目字体样式-->
     <style name="style_item_card_font" parent="style_font_black_big"/>
 
-    <style name="style_item_card_img">
+    <style name="style_item_card_more">
         <item name="android:layout_width">@dimen/dp_15</item>
         <item name="android:layout_height">@dimen/dp_15</item>
         <item name="android:layout_alignParentEnd">true</item>
