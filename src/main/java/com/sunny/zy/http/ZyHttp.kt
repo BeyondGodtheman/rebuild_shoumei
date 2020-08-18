@@ -6,6 +6,7 @@ import com.sunny.zy.http.parser.IResponseParser
 import com.sunny.zy.utils.ZyCookieJar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.internal.platform.Platform
@@ -28,12 +29,16 @@ object ZyHttp {
     //结果解析器（默认为Gson）
     private var iResponseParser: IResponseParser = GSonResponseParser()
 
+    private val headerInterceptor: Interceptor by lazy {
+        HeaderInterceptor()
+    }
+
     /**
      * 初始化OKHttp
      */
-    fun <T> getOkHttpClient(httpResultBean: HttpResultBean<T>): OkHttpClient {
+    private fun <T> getOkHttpClient(httpResultBean: HttpResultBean<T>): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(HeaderInterceptor())
+            .addInterceptor(headerInterceptor)
             .addNetworkInterceptor(
                 HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
                     override fun log(message: String) {
@@ -159,6 +164,14 @@ object ZyHttp {
         }
     }
 
+
+    /**
+     * 设置头信息
+     */
+    fun setHttpHeader(headerMap: HashMap<String, Any>) {
+        if (headerInterceptor is HeaderInterceptor)
+            (headerInterceptor as HeaderInterceptor).setHttpHeader(headerMap)
+    }
 
     /**
      * 执行网络请求并处理结果

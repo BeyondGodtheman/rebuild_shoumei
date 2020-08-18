@@ -1,6 +1,5 @@
 package com.sunny.zy.http
 
-import com.sunny.zy.http.Constant
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -10,19 +9,24 @@ import okhttp3.Response
  * Mail zhangye98@foxmail.com
  */
 class HeaderInterceptor : Interceptor {
+
+    private var headerMap = hashMapOf<String, Any>()
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val authorised = originalRequest.newBuilder()
-                .header("authorization", getAuthorization())
-                .build()
-        return chain.proceed(authorised)
+        headerMap.forEach {
+            authorised.header(it.key, it.value.toString())
+        }
+        return chain.proceed(authorised.build())
     }
 
     /**
-     * 生成服务验证头信息
+     * 设置网络请求头信息
      */
-    private fun getAuthorization(): String {
-        val authorizationStr = StringBuilder("sm-auth-${Constant.VERSION}")
-        return authorizationStr.toString()
+    fun setHttpHeader(headerMap: HashMap<String, Any>) {
+        this.headerMap.clear()
+        this.headerMap.putAll(headerMap)
     }
+
 }
