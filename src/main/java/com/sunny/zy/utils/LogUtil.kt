@@ -4,7 +4,7 @@ package com.sunny.zy.utils
 
 import android.text.TextUtils
 import android.util.Log
-import com.sunny.zy.http.Constant
+import com.sunny.zy.http.ZyConfig
 
 /**
  * 移植xUtils日志代码
@@ -13,12 +13,12 @@ import com.sunny.zy.http.Constant
 
 object LogUtil {
     private var customTagPrefix = ""
-    private var allowD = Constant.isLog
-    private var allowE = Constant.isLog
-    private var allowI = Constant.isLog
-    private var allowV = Constant.isLog
-    private var allowW = Constant.isLog
-    private var allowWtf = Constant.isLog
+    private var allowD = ZyConfig.isLog
+    private var allowE = ZyConfig.isLog
+    private var allowI = ZyConfig.isLog
+    private var allowV = ZyConfig.isLog
+    private var allowW = ZyConfig.isLog
+    private var allowWtf = ZyConfig.isLog
     private var customLogger: CustomLogger? = null
 
 

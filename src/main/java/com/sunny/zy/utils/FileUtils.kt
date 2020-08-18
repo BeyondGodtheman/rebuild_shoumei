@@ -4,8 +4,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.core.content.FileProvider
 import com.sunny.zy.ZyFrameStore
-import com.sunny.zy.http.Constant
-import com.sunny.zy.http.UrlConstant
+import com.sunny.zy.http.ZyConfig
 import java.io.File
 import java.text.DecimalFormat
 
@@ -18,7 +17,7 @@ object FileUtils {
      * 获取换成你文件路径
      */
     private fun getCacheDir(): File {
-        val file = File(UrlConstant.TEMP ?: "")
+        val file = File(ZyConfig.DOWNLOADS)
         if (!file.exists()) {
             file.mkdirs()
         }
@@ -121,7 +120,7 @@ object FileUtils {
         try {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 FileProvider.getUriForFile(
-                    ZyFrameStore.getContext(), Constant.authorities, File(path)
+                    ZyFrameStore.getContext(), ZyConfig.authorities, File(path)
                 )
             } else {
                 Uri.fromFile(File(path))

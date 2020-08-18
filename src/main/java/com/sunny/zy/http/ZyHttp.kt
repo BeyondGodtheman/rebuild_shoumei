@@ -1,12 +1,13 @@
 package com.sunny.zy.http
 
 import com.sunny.zy.http.bean.HttpResultBean
+import com.sunny.zy.http.body.ProgressResponseBody
 import com.sunny.zy.http.parser.GSonResponseParser
 import com.sunny.zy.http.parser.IResponseParser
+import com.sunny.zy.http.request.ZyRequest
 import com.sunny.zy.utils.ZyCookieJar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.internal.platform.Platform
@@ -29,16 +30,13 @@ object ZyHttp {
     //结果解析器（默认为Gson）
     private var iResponseParser: IResponseParser = GSonResponseParser()
 
-    private val headerInterceptor: Interceptor by lazy {
-        HeaderInterceptor()
-    }
 
     /**
      * 初始化OKHttp
      */
     private fun <T> getOkHttpClient(httpResultBean: HttpResultBean<T>): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(headerInterceptor)
+            .addInterceptor(ZyConfig.headerInterceptor)
             .addNetworkInterceptor(
                 HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
                     override fun log(message: String) {
@@ -81,8 +79,7 @@ object ZyHttp {
      * get请求
      * @param url URL服务器地址
      * @param params 传递的数据map（key,value)
-     * @param onResult 解析类型 例如为String::class.java
-     * @return HttpResultBean<clazz> 网络请求结果
+     * @param httpResultBean 包含解析结果的实体bean
      */
     suspend fun <T> get(
         url: String,
@@ -101,8 +98,7 @@ object ZyHttp {
      * postForm请求
      * @param url URL服务器地址
      * @param params 传递的数据map（key,value)
-     * @param clazz 解析类型 例如为String::class.java
-     * @return HttpResultBean<clazz> 网络请求结果
+     * @param httpResultBean 包含解析结果的实体bean
      */
     suspend fun <T> post(
         url: String,
@@ -134,8 +130,7 @@ object ZyHttp {
      * post传递JSON请求
      * @param url URL服务器地址
      * @param json 传递的json字符串
-     * @param clazz 解析类型 例如为String::class.java
-     * @return HttpResultBean<clazz> 网络请求结果
+     * @param httpResultBean 包含解析结果的实体bean
      */
     suspend fun <T> postJson(url: String, json: String, httpResultBean: HttpResultBean<T>) {
         return withContext(Dispatchers.IO) {
@@ -166,18 +161,9 @@ object ZyHttp {
 
 
     /**
-     * 设置头信息
-     */
-    fun setHttpHeader(headerMap: HashMap<String, Any>) {
-        if (headerInterceptor is HeaderInterceptor)
-            (headerInterceptor as HeaderInterceptor).setHttpHeader(headerMap)
-    }
-
-    /**
      * 执行网络请求并处理结果
      * @param request OkHttp请求对象
-     * @param onResult 网络请求回调
-     * @return HttpResultBean<clazz> 网络请求结果
+     * @param httpResultBean 包含解析结果的实体bean
      */
     private fun <T> execution(
         request: Request,

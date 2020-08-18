@@ -9,8 +9,7 @@ import android.os.Build
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
 import com.sunny.zy.base.BaseActivity
-import com.sunny.zy.http.Constant
-import com.sunny.zy.http.UrlConstant
+import com.sunny.zy.http.ZyConfig
 import java.io.File
 
 /**
@@ -146,10 +145,10 @@ class CameraUtil(private var activity: BaseActivity) {
     //初始化图片文件及URI
     private fun initFile() {
         //有权限
-        file = File(UrlConstant.TEMP, "IMG_${System.currentTimeMillis()}.jpg")
+        file = File(ZyConfig.DOWNLOADS, "IMG_${System.currentTimeMillis()}.jpg")
         file?.let {
             uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                FileProvider.getUriForFile(activity, Constant.authorities, it)
+                FileProvider.getUriForFile(activity, ZyConfig.authorities, it)
             } else {
                 Uri.fromFile(file)
             }

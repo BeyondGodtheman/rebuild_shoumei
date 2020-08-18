@@ -10,7 +10,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import com.sunny.zy.R
-import com.sunny.zy.http.Constant
+import com.sunny.zy.http.ZyConfig
 import kotlinx.android.synthetic.main.dialog_layout_download.view.*
 import java.io.File
 
@@ -56,7 +56,7 @@ class DownLoadDialog(context: Context) : AlertDialog.Builder(context) {
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            FileProvider.getUriForFile(context, Constant.authorities, file)
+            FileProvider.getUriForFile(context, ZyConfig.authorities, file)
         } else {
             Uri.fromFile(file)
         }

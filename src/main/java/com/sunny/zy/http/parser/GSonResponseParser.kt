@@ -3,7 +3,7 @@ package com.sunny.zy.http.parser
 import com.google.gson.Gson
 import com.sunny.zy.base.BaseModel
 import com.sunny.zy.base.PageModel
-import com.sunny.zy.http.UrlConstant
+import com.sunny.zy.http.ZyConfig
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import java.io.File
@@ -67,7 +67,7 @@ class GSonResponseParser : IResponseParser {
 
 
     private fun writeResponseBodyToDisk(data: InputStream, serializedName: String?): File {
-        val pathFile = File(UrlConstant.TEMP ?: "")
+        val pathFile = File(ZyConfig.DOWNLOADS)
         if (!pathFile.exists()) {
             pathFile.mkdirs()
         }

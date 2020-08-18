@@ -1,5 +1,6 @@
-package com.sunny.zy.http
+package com.sunny.zy.http.request
 
+import com.sunny.zy.http.ZyConfig
 import okhttp3.FormBody
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -19,7 +20,7 @@ class ZyRequest {
 
     private fun getUrlSb(url: String) = StringBuilder().apply {
         if (!url.contains("http://") && !url.contains("https://")) {
-            append(UrlConstant.HOST)
+            append(ZyConfig.HOST)
             append("/")
         }
         append(url)

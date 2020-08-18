@@ -1,4 +1,4 @@
-package com.sunny.zy.http
+package com.sunny.zy.http.body
 
 import okhttp3.MediaType
 import okhttp3.ResponseBody
