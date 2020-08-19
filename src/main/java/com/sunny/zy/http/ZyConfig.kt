@@ -35,7 +35,10 @@ object ZyConfig {
     /**
      * 域名变量
      */
-    val HOST = "$HOST_PREFIX://$IP:$PORT"
+    val HOST: String
+        get() {
+            return "$HOST_PREFIX://$IP:$PORT"
+        }
 
     /**
      * provider权限
