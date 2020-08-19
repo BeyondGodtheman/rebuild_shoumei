@@ -51,6 +51,10 @@
         <item name="android:textSize">@dimen/dp_12</item>
     </style>
 
+    <style name="style_font_black_smaller" parent="style_font_black">
+        <item name="android:textSize">@dimen/dp_10</item>
+    </style>
+
     <style name="style_font_black_big" parent="style_font_black">
         <item name="android:textSize">@dimen/dp_16</item>
     </style>
@@ -67,6 +71,10 @@
 
     <style name="style_font_white_small" parent="style_font_white">
         <item name="android:textSize">@dimen/dp_12</item>
+    </style>
+
+    <style name="style_font_white_smaller" parent="style_font_white">
+        <item name="android:textSize">@dimen/dp_10</item>
     </style>
 
     <style name="style_font_white_big" parent="style_font_white">
@@ -127,7 +135,7 @@
     </style>
 
     <!--菜单条目字体样式-->
-    <style name="style_item_card_font" parent="style_font_black_big"/>
+    <style name="style_item_card_font" parent="style_font_black_big" />
 
     <style name="style_item_card_more">
         <item name="android:layout_width">@dimen/dp_15</item>

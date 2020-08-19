@@ -12,14 +12,34 @@ object ZyConfig {
 
     fun isDebug(): Boolean = true
 
-    var isLog = true //是否打印LOG
+    /**
+     * 是否打印LOG
+     */
+    var isLog = true
 
+    /**
+     * IP地址
+     */
     var IP = "127.0.0.1" // 内网测试地址
 
+    /**
+     * 端口
+     */
     var PORT = "80"
 
-    val HOST = "https://$IP:$PORT"
+    /**
+     * 域名前缀：http? https
+     */
+    var HOST_PREFIX = "https"
 
+    /**
+     * 域名变量
+     */
+    val HOST = "$HOST_PREFIX://$IP:$PORT"
+
+    /**
+     * provider权限
+     */
     var authorities = "com.sunny.zy.provider"
 
     val DOWNLOADS = ZyFrameStore.getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.path ?: "" //内存卡缓存路径
