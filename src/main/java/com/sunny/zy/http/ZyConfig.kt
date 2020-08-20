@@ -45,7 +45,7 @@ object ZyConfig {
      */
     var authorities = "com.sunny.zy.provider"
 
-    val DOWNLOADS = ZyFrameStore.getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.path ?: "" //内存卡缓存路径
+    val TEMP = ZyFrameStore.getContext().getExternalFilesDir("temp")?.path ?: "" //内存卡缓存路径
 
 
     val headerInterceptor: HeaderInterceptor by lazy {

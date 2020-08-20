@@ -56,6 +56,10 @@ object ZyFrameStore {
         storeMap.remove(key)
     }
 
+    fun removeAllData() {
+        storeMap.clear()
+    }
+
     /**
      * 存储管理Activity
      */

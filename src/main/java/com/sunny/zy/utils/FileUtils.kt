@@ -17,7 +17,7 @@ object FileUtils {
      * 获取换成你文件路径
      */
     private fun getCacheDir(): File {
-        val file = File(ZyConfig.DOWNLOADS)
+        val file = File(ZyConfig.TEMP)
         if (!file.exists()) {
             file.mkdirs()
         }

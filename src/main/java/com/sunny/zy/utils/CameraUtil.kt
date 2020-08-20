@@ -145,7 +145,7 @@ class CameraUtil(private var activity: BaseActivity) {
     //初始化图片文件及URI
     private fun initFile() {
         //有权限
-        file = File(ZyConfig.DOWNLOADS, "IMG_${System.currentTimeMillis()}.jpg")
+        file = File(ZyConfig.TEMP, "IMG_${System.currentTimeMillis()}.jpg")
         file?.let {
             uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 FileProvider.getUriForFile(activity, ZyConfig.authorities, it)

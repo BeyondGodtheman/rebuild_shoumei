@@ -66,13 +66,8 @@ open class PullRefreshFragment<T> : BaseFragment() {
     fun addData(data: ArrayList<T>) {
         if (page == 1) {
             adapter?.clearData()
-            if (data.isEmpty()) {
-                pullRefreshLayout.finishRefreshWithNoMoreData()
-                pullRefreshLayout.showEmptyView()
-            } else {
-                pullRefreshLayout.finishRefresh()
-                pullRefreshLayout.hideEmptyView()
-            }
+            pullRefreshLayout.finishRefresh()
+            updateEmptyView(data)
         } else {
             if (data.isEmpty()) {
                 page--
@@ -88,11 +83,22 @@ open class PullRefreshFragment<T> : BaseFragment() {
     fun deleteData(index: Int) {
         adapter?.deleteData(index)
         adapter?.notifyDataSetChanged()
+        updateEmptyView()
     }
 
     fun deleteData(data: T) {
         adapter?.deleteData(data)
         adapter?.notifyDataSetChanged()
+        updateEmptyView()
+    }
+
+
+    private fun updateEmptyView(data: ArrayList<T>? = null) {
+        if ((data ?: getAllData())?.isEmpty() == true) {
+            pullRefreshLayout.showEmptyView()
+        } else {
+            pullRefreshLayout.hideEmptyView()
+        }
     }
 
 

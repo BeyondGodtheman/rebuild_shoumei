@@ -67,7 +67,7 @@ class GSonResponseParser : IResponseParser {
 
 
     private fun writeResponseBodyToDisk(data: InputStream, serializedName: String?): File {
-        val pathFile = File(ZyConfig.DOWNLOADS)
+        val pathFile = File(ZyConfig.TEMP)
         if (!pathFile.exists()) {
             pathFile.mkdirs()
         }

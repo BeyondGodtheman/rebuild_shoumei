@@ -22,6 +22,8 @@ object RouterPath {
 
     const val TASK_DETAIL_ACTIVITY = "/task/TaskDetailActivity" //任务首页
 
+    const val TASK_APPOINT_ACTIVITY = "/task/AppointActivity" //指派页面
+
     const val TASK_PROGRESS_ACTIVITY = "/task/TaskProgressActivity" //任务进度
 
     const val GOODS_ACTIVITY = "/task/GoodsListActivity" //物品清单
